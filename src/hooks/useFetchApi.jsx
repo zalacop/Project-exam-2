@@ -12,7 +12,7 @@ function useApi(url) {
                 setIsError(false);
                 const response = await fetch(url);
                 const json = await response.json();
-                setData(json);
+                setData(json.data);
             } catch(error) {
                 console.log(error);
                 setIsError(true);

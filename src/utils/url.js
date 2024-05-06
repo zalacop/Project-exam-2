@@ -1,4 +1,4 @@
-const base = "https://v2.api.noroff.dev/docs/json";
+const base = "https://v2.api.noroff.dev";
 const holidazeEndpoints = "/holidaze";
 
 const holidazeBaseUrl = base + holidazeEndpoints;
