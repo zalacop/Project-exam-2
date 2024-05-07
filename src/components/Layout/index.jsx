@@ -1,6 +1,6 @@
 import Header from "../Header";
 import Search from "../Search";
-import { FetchVenues } from "../Venues";
+import Home from "../Venues";
 
 function Layout() {
     return (
@@ -8,7 +8,7 @@ function Layout() {
             <Header />
             <main>
                 <Search />
-                <FetchVenues />
+                <Home />
             </main>
         </>
     );
