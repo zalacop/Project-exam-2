@@ -1,6 +1,6 @@
+import { Outlet } from "react-router-dom";
 import Header from "../Header";
 import Search from "../Search";
-import Home from "../Venues";
 
 function Layout() {
     return (
@@ -8,7 +8,7 @@ function Layout() {
             <Header />
             <main>
                 <Search />
-                <Home />
+                <Outlet />
             </main>
         </>
     );

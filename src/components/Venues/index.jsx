@@ -3,7 +3,7 @@ import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
 
 function FetchVenues() {
-    const { data, isLoading, isError } = useApi(holidazeUrls.urlVenues);
+    const { data, isLoading, isError } = useApi(holidazeUrls.urlVenues + '?_owner=true&_bookings=true');
 
     if (isLoading) {
         return { norwayCities: [], 
@@ -33,31 +33,32 @@ function FetchVenues() {
         const city = venue.location.city;
         const country = venue.location.country;
         const continent = venue.location.continent;
+        const firstImage = venue.media && venue.media.length > 0 ? venue.media[0].url : null;
 
         if (country !== null && country !== undefined) {
             switch (true) {
                 case country.includes('Norway'):
                 case country.includes('Norge'):
-                    categorizedData.norwayCities.push(city);
+                    categorizedData.norwayCities.push({ city, image: firstImage });
                     break;
                 case country === 'Spain':
-                    categorizedData.spainCities.push(city);
+                    categorizedData.spainCities.push({ city, image: firstImage });
                     break;
-
                 case country.includes('USA'):
                 case country.includes('America'):
                 case continent && (continent.includes('America') || continent.includes('USA')):
-                    categorizedData.usaStates.push(city);
+                    categorizedData.usaStates.push({ city, image: firstImage });
                     break;
                 default:
                     break;
-            }}
+            }
+        }
     });
 
     return { ...categorizedData, isLoading: false, isError: false };
 }
 
-function Home() {
+function HomeVenues() {
     const { norwayCities, spainCities, usaStates, isLoading, isError } = FetchVenues();
 
     if (isLoading) {
@@ -68,14 +69,16 @@ function Home() {
         return <p>Something went wrong!</p>;
     }
 
-
     return (
         <div>
             <section>
                 <h2>Norway</h2>
                 <ul>
-                    {norwayCities.map((city, index) => (
-                        <li key={`${city}-${index}`}>{city}</li> 
+                    {norwayCities.map((venue, index) => (
+                        <li key={`${venue.city}-${index}`}>
+                            <img src={venue.image} alt={venue.city} />
+                            {venue.city}
+                        </li> 
                     ))}
                 </ul>
             </section>
@@ -83,8 +86,11 @@ function Home() {
                 <section>
                     <h2>Spain</h2>
                     <ul>
-                        {spainCities.map((city, index) => (
-                            <li key={`${city}-${index}`}>{city}</li> 
+                        {spainCities.map((venue, index) => (
+                            <li key={`${venue.city}-${index}`}>
+                                <img src={venue.image} alt={venue.city} />
+                                {venue.city}
+                            </li> 
                         ))}
                     </ul>
                 </section>
@@ -93,8 +99,11 @@ function Home() {
                 <section>
                     <h2>USA</h2>
                     <ul>
-                        {usaStates.map((city, index) => (
-                            <li key={`${city}-${index}`}>{city}</li> 
+                        {usaStates.map((venue, index) => (
+                            <li key={`${venue.city}-${index}`}>
+                                <img src={venue.image} alt={venue.city} />
+                                {venue.city}
+                            </li> 
                         ))}
                     </ul>
                 </section>
@@ -103,4 +112,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default HomeVenues;
