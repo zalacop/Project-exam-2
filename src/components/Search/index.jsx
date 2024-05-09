@@ -45,6 +45,7 @@ function Search() {
                 <span><FaSearch /></span>
                 <input 
                     type="text"
+                    className="border"
                     value={searchValue}
                     onChange={handleChange}
                     autoComplete="off"
