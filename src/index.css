@@ -38,3 +38,41 @@ h5,
 h6 {
   font-family: theme("fontFamily.heading");
 }
+
+.home-image {
+    object-fit: cover;
+    object-position: center;
+    max-height: 600px;
+    height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .home-image {
+    height: 400px !important;
+}}
+  
+@media (max-width: 420px) {
+  .home-image {
+    height: 200px !important;
+}}
+
+.slick-prev:before,
+.slick-next:before {
+  color: theme("colors.dark") !important;
+  background-color: theme("colors.background");
+}
+
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  color: theme("colors.dark") !important;
+  background-color: theme("colors.background");
+}
+
+.slick-prev,
+.slick-next {
+  color: theme("colors.dark") !important;
+  background-color: theme("colors.background");
+}
+

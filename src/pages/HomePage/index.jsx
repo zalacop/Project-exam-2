@@ -1,14 +1,17 @@
 import React from "react";
-import HomeVenues from "../../components/Venues";
+import HomeVenues from "../../components/Venues/home";
 import image from "../../assets/P1088557.jpg";
 
 function Home() {
   return (
     <>
-      <img src={image} alt="Image of Ljubljana." />
+      <div className="relative w-full overflow-hidden">
+        <img src={image} alt="Image of Ljubljana" className="w-full opacity-90 home-image" />
+      </div>
       <HomeVenues />
     </>
   );
 }
 
 export default Home;
+
