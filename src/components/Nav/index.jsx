@@ -1,12 +1,25 @@
-import React, { useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    setIsLoggedIn(accessToken ? true : false);
+  }, [isLoggedIn]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
@@ -18,7 +31,7 @@ function Nav() {
         aria-controls="navbar-default"
         aria-expanded={isMenuOpen}
       >
-        <span className="sr-only"></span>
+        <span className="sr-only">Toggle Menu</span>
         <svg
           className="h-5 w-5"
           aria-hidden="true"
@@ -42,27 +55,46 @@ function Nav() {
           <li>
             <Link
               to="/venues"
-              className="block rounded px-3 py-2 md:bg-transparent md:p-0"
-              aria-current="page"
+              className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
             >
               Venues
             </Link>
           </li>
-          <li>
-            <a
-              href="#"
-              className="block rounded px-3 py-2 md:bg-transparent md:p-0"
-            >
-              Log in
-            </a>
-          </li>
-          <li className="block rounded px-3 py-2 md:mx-auto md:bg-transparent md:p-0">
-            <CgProfile className="h-5 w-5 md:h-10 md:w-7" />
-          </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <Link
+                  to="/profile"
+                  className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+          {!isLoggedIn && (
+            <li>
+              <Link
+                to="/login"
+                className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+              >
+                Log in
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </>
   );
+ 
 }
 
 export default Nav;
