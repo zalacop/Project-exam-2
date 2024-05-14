@@ -2,49 +2,43 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import holidazeUrls from "../../utils/url";
 import useApi from "../../hooks/useFetchApi";
+import VenueCard from "../Venues";
 
 function Search() {
-  const { data: venues } = useApi(
+  const [searchValue, setSearchValue] = useState("");
+  const { data, isLoading, isError } = useApi(
     holidazeUrls.urlVenues + "?_owner=true&_bookings=true",
   );
 
-  const [searchValue, setSearchValue] = useState("");
-  const [searchResult, setSearchResult] = useState(venues);
-  const [originalVenues, setOriginalVenues] = useState(venues);
-
-  useEffect(() => {
-    setOriginalVenues(venues);
-    setSearchResult(venues);
-  }, [venues]);
-
-  function handleChange(event) {
-    setSearchValue(event.target.value);
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-    const filteredResults = originalVenues.filter((venue) => {
-      const search = searchValue.toLowerCase().trim();
-      return (
-        venue.name.toLowerCase().includes(search) ||
-        (venue.location &&
-          Array.isArray(venue.location) &&
-          venue.location.some(
-            (location) =>
-              (location.country &&
-                location.country.toLowerCase().includes(searchTerm)) ||
-              (location.city &&
-                location.city.toLowerCase().includes(searchTerm)) ||
-              (location.continent &&
-                location.continent.toLowerCase().includes(searchTerm)),
-          ))
-      );
-    });
-    setSearchResult(filteredResults);
-  }, [searchValue, originalVenues]);
-
-  function handleVenueClick() {
-    setSearchValue("");
+  if (isError) {
+    return <div>Something went wrong!</div>;
   }
+
+  const filteredVenues = searchValue
+    ? data.filter((venue) => {
+        const nameMatch = venue.name
+          .toLowerCase()
+          .includes(searchValue.toLowerCase());
+        const cityMatch =
+          venue.location.city &&
+          venue.location.city.toLowerCase().includes(searchValue.toLowerCase());
+        const countryMatch =
+          venue.location.country &&
+          venue.location.country
+            .toLowerCase()
+            .includes(searchValue.toLowerCase());
+        const continentMatch =
+          venue.location.continent &&
+          venue.location.continent
+            .toLowerCase()
+            .includes(searchValue.toLowerCase());
+        return nameMatch || cityMatch || countryMatch || continentMatch;
+      })
+    : [];
 
   return (
     <>
@@ -55,9 +49,9 @@ function Search() {
             name="search"
             className="text-gray-800 bg-white w-full appearance-none border-2 border-dark px-3 py-2 pl-10 focus:outline-none"
             value={searchValue}
-            onChange={handleChange}
+            onChange={(event) => setSearchValue(event.target.value)}
             autoComplete="off"
-            placeholder="Search..."
+            placeholder="Search"
             id="search"
           />
           <div className="absolute inset-y-0 left-0 flex items-center">
@@ -67,15 +61,11 @@ function Search() {
           </div>
         </div>
       </div>
-
-      <div>
-        {searchValue &&
-          searchResult.map((venue) => (
-            <div key={venue.id} className="text-white">
-              {venue.name}
-            </div>
-          ))}
-      </div>
+      {filteredVenues.length > 0 && (
+        <div className="flex w-full max-w-[990px] flex-wrap justify-center">
+          <VenueCard venues={filteredVenues} className="mt-6" />
+        </div>
+      )}
     </>
   );
 }

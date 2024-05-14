@@ -6,7 +6,11 @@ function Home() {
   return (
     <>
       <div className="relative w-full overflow-hidden">
-        <img src={image} alt="Image of Ljubljana" className="w-full opacity-90 home-image" />
+        <img
+          src={image}
+          alt="Image of Ljubljana"
+          className="home-image w-full opacity-90"
+        />
       </div>
       <HomeVenues />
     </>
@@ -14,4 +18,3 @@ function Home() {
 }
 
 export default Home;
-

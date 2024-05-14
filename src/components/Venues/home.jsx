@@ -5,6 +5,7 @@ import holidazeUrls from "../../utils/url";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 function FetchVenues() {
   const { data, isLoading, isError } = useApi(
@@ -15,7 +16,7 @@ function FetchVenues() {
     return {
       norwayCities: [],
       spainCities: [],
-      usaStates: [],
+      germanyCities: [],
       isLoading: true,
       isError: false,
     };
@@ -25,7 +26,7 @@ function FetchVenues() {
     return {
       norwayCities: [],
       spainCities: [],
-      usaStates: [],
+      germanyCities: [],
       isLoading: false,
       isError: true,
     };
@@ -34,7 +35,7 @@ function FetchVenues() {
   const categorizedData = {
     norwayCities: [],
     spainCities: [],
-    usaStates: [],
+    germanyCities: [],
   };
 
   data.forEach((venue) => {
@@ -53,11 +54,9 @@ function FetchVenues() {
         case country === "Spain":
           categorizedData.spainCities.push({ city, image: firstImage });
           break;
-        case country.includes("USA"):
-        case country.includes("America"):
-        case continent &&
-          (continent.includes("America") || continent.includes("USA")):
-          categorizedData.usaStates.push({ city, image: firstImage });
+        case country.includes("Germany"):
+        case country.includes("Tyskland"):
+          categorizedData.germanyCities.push({ city, image: firstImage });
           break;
         default:
           break;
@@ -69,7 +68,8 @@ function FetchVenues() {
 }
 
 function HomeVenues() {
-  const { norwayCities, spainCities, usaStates, isLoading, isError } = FetchVenues();
+  const { norwayCities, spainCities, germanyCities, isLoading, isError } =
+    FetchVenues();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -108,19 +108,21 @@ function HomeVenues() {
   return (
     <div>
       <section className="my-8">
-        <h2 className="font-bold text-2xl ml-5 pl-5 my-5">Norway</h2>
-        <div className="w-3/4 mx-auto slider-container">
+        <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Norway</h2>
+        <div className="slider-container mx-auto w-3/4">
           <Slider {...settings}>
             {norwayCities.map((venue, index) => (
               <div key={`${venue.city}-${index}`} className="h-full">
-                <div className="h-64 mx-2">
-                  <img
-                    src={venue?.image}
-                    alt={venue.city}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <h3 className="mt-3 mx-3 font-semibold">{venue.city}</h3>
+                <Link to={`/venue/${venue.id}`}>
+                  <div className="mx-2 h-64">
+                    <img
+                      src={venue?.image}
+                      alt={venue.city}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
+                </Link>
               </div>
             ))}
           </Slider>
@@ -129,19 +131,21 @@ function HomeVenues() {
 
       {spainCities.length > 0 && (
         <section className="my-8 py-5">
-          <h2 className="font-bold text-2xl ml-5 pl-5 my-5">Spain</h2>
-          <div className="w-3/4 mx-auto">
+          <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Spain</h2>
+          <div className="mx-auto w-3/4">
             <Slider {...settings}>
               {spainCities.map((venue, index) => (
                 <div key={`${venue.city}-${index}`} className="h-full">
-                  <div className="h-64 mx-2">
-                    <img
-                      src={venue?.image}
-                      alt={venue.city}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <h3 className="mt-3 mx-3 font-semibold">{venue.city}</h3>
+                  <Link to={`/venue/${venue.id}`}>
+                    <div className="mx-2 h-64">
+                      <img
+                        src={venue?.image}
+                        alt={venue.city}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
+                  </Link>
                 </div>
               ))}
             </Slider>
@@ -149,21 +153,23 @@ function HomeVenues() {
         </section>
       )}
 
-      {usaStates.length > 0 && (    
+      {germanyCities.length > 0 && (
         <section className="my-8 py-5">
-          <h2 className="font-bold text-2xl ml-5 pl-5 my-5">USA</h2>
-          <div className="w-3/4 mx-auto">
+          <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Germany</h2>
+          <div className="mx-auto w-3/4">
             <Slider {...settings}>
-              {usaStates.map((venue, index) => (
+              {germanyCities.map((venue, index) => (
                 <div key={`${venue.city}-${index}`} className="h-full">
-                  <div className="h-64 mx-2">
-                    <img
-                      src={venue?.image}
-                      alt={venue.city}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <h3 className="mt-3 mx-3 font-semibold">{venue.city}</h3>
+                  <Link to={`/venue/${venue.id}`}>
+                    <div className="mx-2 h-64">
+                      <img
+                        src={venue?.image}
+                        alt={venue.city}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
+                  </Link>
                 </div>
               ))}
             </Slider>
@@ -175,4 +181,3 @@ function HomeVenues() {
 }
 
 export default HomeVenues;
-
