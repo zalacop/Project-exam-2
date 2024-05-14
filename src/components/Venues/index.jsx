@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function VenueCard({ venues }) {
   return (
-    <div className="mx-auto w-3/4">
+    <div className="my-6 mx-auto w-3/4">
       {venues.map((venue) => (
         <div
           key={venue.id}

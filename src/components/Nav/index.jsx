@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,13 +40,13 @@ function Nav() {
       >
         <ul className="mt-4 flex flex-col items-center p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0 rtl:space-x-reverse">
           <li>
-            <a
-              href="#"
+            <Link
+              to="/venues"
               className="block rounded px-3 py-2 md:bg-transparent md:p-0"
               aria-current="page"
             >
               Venues
-            </a>
+            </Link>
           </li>
           <li>
             <a
