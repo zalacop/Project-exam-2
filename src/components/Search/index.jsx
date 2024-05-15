@@ -7,24 +7,32 @@ function Search({ allVenues, onFilterVenues }) {
   const filterVenues = useCallback(
     (searchInput) => {
       if (searchInput === "") {
-        return allVenues; 
+        return allVenues;
       } else {
         return allVenues.filter((venue) => {
-          const nameMatch = venue.name.toLowerCase().includes(searchInput.toLowerCase());
+          const nameMatch = venue.name
+            .toLowerCase()
+            .includes(searchInput.toLowerCase());
           const cityMatch =
             venue.location.city &&
-            venue.location.city.toLowerCase().includes(searchInput.toLowerCase());
+            venue.location.city
+              .toLowerCase()
+              .includes(searchInput.toLowerCase());
           const countryMatch =
             venue.location.country &&
-            venue.location.country.toLowerCase().includes(searchInput.toLowerCase());
+            venue.location.country
+              .toLowerCase()
+              .includes(searchInput.toLowerCase());
           const continentMatch =
             venue.location.continent &&
-            venue.location.continent.toLowerCase().includes(searchInput.toLowerCase());
+            venue.location.continent
+              .toLowerCase()
+              .includes(searchInput.toLowerCase());
           return nameMatch || cityMatch || countryMatch || continentMatch;
         });
       }
     },
-    [allVenues]
+    [allVenues],
   );
 
   useEffect(() => {

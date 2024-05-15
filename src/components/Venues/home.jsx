@@ -136,17 +136,17 @@ function HomeVenues() {
             <Slider {...settings}>
               {spainCities.map((venue, index) => (
                 <div key={`${venue.city}-${index}`} className="h-full">
-                <Link to={`/venue/${venue.id}`}>
-                  <div className="mx-2 h-64">
-                    <img
-                      src={venue?.image}
-                      alt={venue.city}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
-                </Link>
-              </div>
+                  <Link to={`/venue/${venue.id}`}>
+                    <div className="mx-2 h-64">
+                      <img
+                        src={venue?.image}
+                        alt={venue.city}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
+                  </Link>
+                </div>
               ))}
             </Slider>
           </div>
@@ -160,17 +160,17 @@ function HomeVenues() {
             <Slider {...settings}>
               {germanyCities.map((venue, index) => (
                 <div key={`${venue.city}-${index}`} className="h-full">
-                <Link to={`/venue/${venue.id}`}>
-                  <div className="mx-2 h-64">
-                    <img
-                      src={venue?.image}
-                      alt={venue.city}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
-                </Link>
-              </div>
+                  <Link to={`/venue/${venue.id}`}>
+                    <div className="mx-2 h-64">
+                      <img
+                        src={venue?.image}
+                        alt={venue.city}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
+                  </Link>
+                </div>
               ))}
             </Slider>
           </div>

@@ -8,7 +8,7 @@ function Venues() {
   const [allVenues, setAllVenues] = useState([]);
   const [filteredVenues, setFilteredVenues] = useState([]);
   const { data } = useApi(
-    holidazeUrls.urlVenues + "?_owner=true&_bookings=true"
+    holidazeUrls.urlVenues + "?_owner=true&_bookings=true",
   );
 
   useEffect(() => {
@@ -24,10 +24,7 @@ function Venues() {
 
   return (
     <>
-      <Search
-        allVenues={allVenues}
-        onFilterVenues={handleFilteredVenues}
-      />
+      <Search allVenues={allVenues} onFilterVenues={handleFilteredVenues} />
       <VenueCard venues={filteredVenues} />
     </>
   );

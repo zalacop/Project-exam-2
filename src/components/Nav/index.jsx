@@ -55,7 +55,7 @@ function Nav() {
           <li>
             <Link
               to="/venues"
-              className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+              className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
             >
               Venues
             </Link>
@@ -65,7 +65,7 @@ function Nav() {
               <li>
                 <Link
                   to="/profile"
-                  className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+                  className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
                 >
                   Profile
                 </Link>
@@ -73,7 +73,7 @@ function Nav() {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+                  className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
                 >
                   Logout
                 </button>
@@ -84,7 +84,7 @@ function Nav() {
             <li>
               <Link
                 to="/login"
-                className="block rounded px-3 py-2 md:bg-transparent md:p-0 uppercase"
+                className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
               >
                 Log in
               </Link>
@@ -94,7 +94,6 @@ function Nav() {
       </div>
     </>
   );
- 
 }
 
 export default Nav;
