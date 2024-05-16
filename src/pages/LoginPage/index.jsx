@@ -13,10 +13,8 @@ function Login() {
 
     try {
       const userData = await LoginUser(email, password);
-      console.log(userData);
       localStorage.setItem("accessToken", userData.data.accessToken);
       localStorage.setItem("name", userData.data.name);
-
 
       navigate("/profile", { state: { refresh: true } });
     } catch (error) {

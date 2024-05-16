@@ -23,6 +23,6 @@ async function CreateApiKey(name) {
     console.log(error);
     throw error;
   }
-};
+}
 
 export default CreateApiKey;
