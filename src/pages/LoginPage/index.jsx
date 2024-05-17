@@ -24,36 +24,44 @@ function Login() {
   }
 
   return (
-    <>
+    <div className="mx-auto my-20 flex pt-20">
       <form
-        className="form mx-auto my-5 flex flex-col items-center justify-center gap-2 border border-dark py-5"
+        className="mx-auto flex w-1/2 flex-col justify-center gap-3 border bg-background py-20 shadow-md"
         onSubmit={submitForm}
       >
-        <h2>Log in</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        <div className="register_input mb-3">
-          <label htmlFor="email" className="mb-2 text-lg">
+        <h2 className="my-5 flex justify-center text-2xl font-bold">Log in</h2>
+
+        {error && <p className="mx-auto text-xl text-orange">{error}</p>}
+
+        {/* Email */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="login_email" className="mb-2 block text-lg">
             Email
           </label>
           <input
             type="email"
             id="login_email"
-            className="form-control"
+            className="form-input h-8 w-full
+            border focus:outline-none pl-4"
             autoComplete="off"
             placeholder=""
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
-        <div className="register_input mb-3">
-          <label htmlFor="password" className="mb-2 text-lg">
+
+        {/* Password */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="login_password" className="mb-2 block text-lg">
             Password
           </label>
           <input
             type="password"
             id="login_password"
-            className="form-control"
+            className="form-input h-8 w-full
+            border focus:outline-none pl-4"
             minLength="8"
             autoComplete="off"
             placeholder=""
@@ -63,21 +71,23 @@ function Login() {
             required
           />
         </div>
+
+        {/* Submit Button */}
         <button
-          to="/profile"
-          className="btn btn-outline-dark cta px-5 py-1 text-lg"
           onClick={submitForm}
+          to="/profile"
+          className="mx-auto border px-8 py-1 font-bold"
         >
           Log in
         </button>
-        <div className="new-account m-3 flex items-center gap-2">
+        <div className="new-account m-3 mx-auto flex items-center gap-2">
           <p className="text-base">New?</p>
-          <Link to="/register" className="text-blue-500 text-lg">
+          <Link to="/register" className="text-lg underline">
             Create An Account
           </Link>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

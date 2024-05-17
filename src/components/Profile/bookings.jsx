@@ -29,7 +29,7 @@ function MyBookings({ bookings }) {
                 Number of Guests: {booking.guests}
               </p>
               <p className="text-center md:text-left">
-              Price / Night: ${booking.venue.price}
+                Price / Night: ${booking.venue.price}
               </p>
               <button className="border px-8 py-1 font-bold">Delete</button>
             </div>

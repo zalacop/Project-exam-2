@@ -49,14 +49,26 @@ function FetchVenues() {
       switch (true) {
         case country.includes("Norway"):
         case country.includes("Norge"):
-          categorizedData.norwayCities.push({ id: venue.id, city, image: firstImage }); // Include 'id' property
+          categorizedData.norwayCities.push({
+            id: venue.id,
+            city,
+            image: firstImage,
+          }); // Include 'id' property
           break;
         case country === "Spain":
-          categorizedData.spainCities.push({ id: venue.id, city, image: firstImage });
+          categorizedData.spainCities.push({
+            id: venue.id,
+            city,
+            image: firstImage,
+          });
           break;
         case country.includes("Germany"):
         case country.includes("Tyskland"):
-          categorizedData.germanyCities.push({ id: venue.id, city, image: firstImage });
+          categorizedData.germanyCities.push({
+            id: venue.id,
+            city,
+            image: firstImage,
+          });
           break;
         default:
           break;
