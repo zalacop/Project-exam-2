@@ -46,7 +46,6 @@ function Profile() {
 
   const { venues, bookings, avatar, email, name, venueManager } = profile;
 
-  console.log(bookings)
   return (
     <>
       <div className="mx-auto mb-8 mt-20 flex flex-col justify-center gap-20 md:flex-row md:items-start">
