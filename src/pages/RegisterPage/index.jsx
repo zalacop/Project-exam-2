@@ -42,29 +42,29 @@ function Register() {
     let isValid = true;
 
     if (!validateEmail(formData.email)) {
-      errors.email = "Email must be @stud.noroff.no";
+      errors.email = "Email must be @stud.noroff.no!";
       isValid = false;
     }
 
     if (!validateName(formData.name)) {
       errors.name =
-        "Name must not contain punctuation symbols apart from underscore and must be between 4 and 20 characters";
+        "Name must not contain punctuation symbols apart from underscore and must be between 4 and 20 characters!";
       isValid = false;
     }
 
     if (!validatePassword(formData.password, 8)) {
-      errors.password = "Password must have at least 8 characters";
+      errors.password = "Password must have at least 8 characters!";
       isValid = false;
     }
 
     if (formData.password !== formData.repeatPassword) {
-      errors.repeatPassword = "Repeat password must be the same as password";
+      errors.repeatPassword = "Repeat password must be the same as password!";
       isValid = false;
     }
 
     // Validate Avatar (if not empty)
     if (formData.avatar.trim() !== "" && !validateURL(formData.avatar)) {
-      errors.avatar = "Avatar must be a valid URL link";
+      errors.avatar = "Avatar must be a valid URL link!";
       isValid = false;
     }
 
@@ -87,138 +87,159 @@ function Register() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white mx-auto max-w-md rounded-lg p-6 shadow-md"
-    >
-      <h2 className="mb-6 text-2xl">Register</h2>
-      {/* Email */}
-      {errors.email && <div className="text-red-500 mb-4">{errors.email}</div>}
-      <div className="mb-4">
-        <label htmlFor="register_email" className="mb-2 block text-lg">
-          Email
-        </label>
-        <input
-          type="email"
-          id="register_email"
-          className="form-input w-full"
-          autoComplete="off"
-          placeholder=""
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      {/* Name */}
-      {errors.name && <div className="text-red-500 mb-4">{errors.name}</div>}
-      <div className="mb-4">
-        <label htmlFor="name" className="mb-2 block text-lg">
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          className="form-input w-full"
-          autoComplete="off"
-          placeholder=""
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      {/* Password */}
-      {errors.password && (
-        <div className="text-red-500 mb-4">{errors.password}</div>
-      )}
-      <div className="mb-4">
-        <label htmlFor="register_password" className="mb-2 block text-lg">
-          Password
-        </label>
-        <input
-          type="password"
-          id="register_password"
-          className="form-input w-full"
-          minLength="8"
-          autoComplete="off"
-          placeholder=""
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      {/* Repeat Password */}
-      {errors.repeatPassword && (
-        <div className="text-red-500 mb-4">{errors.repeatPassword}</div>
-      )}
-      <div className="mb-4">
-        <label htmlFor="repeat_password" className="mb-2 block text-lg">
-          Repeat password
-        </label>
-        <input
-          type="password"
-          id="repeat_password"
-          className="form-input w-full"
-          minLength="8"
-          autoComplete="off"
-          placeholder=""
-          name="repeatPassword"
-          value={formData.repeatPassword}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      {/* Avatar */}
-      {errors.avatar && (
-        <div className="text-red-500 mb-4">{errors.avatar}</div>
-      )}
-      <div className="mb-4">
-        <label htmlFor="avatar" className="mb-2 block text-lg">
-          Avatar URL
-        </label>
-        <input
-          type="text"
-          id="avatar"
-          className="form-input w-full"
-          autoComplete="off"
-          placeholder=""
-          name="avatar"
-          value={formData.avatar}
-          onChange={handleChange}
-        />
-      </div>
-      {/* Venue Manager */}
-      <div className="mb-4">
-        <input
-          type="checkbox"
-          id="isVenueManager"
-          name="isVenueManager"
-          className="form-checkbox mr-2 h-4 w-4"
-          checked={formData.isVenueManager}
-          onChange={handleChange}
-        />
-        <label htmlFor="isVenueManager" className="text-lg">
-          I am a Venue Manager
-        </label>
-      </div>
-      {/* Submit Button */}
-      <button
-        type="submit"
-        id="register_button"
-        className="bg-blue-500 text-white hover:bg-blue-600 rounded-lg px-4 py-2 text-lg"
+    <div className="mx-auto my-20 flex pt-20">
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto flex w-1/2 flex-col justify-center gap-3 border bg-background py-20 shadow-md"
       >
-        Register
-      </button>
-      {/* Cancel Button */}
-      <Link
-        to="/login"
-        className="text-blue-500 hover:text-blue-600 mt-4 block text-center"
-      >
-        Cancel
-      </Link>
-    </form>
+        <h2 className="my-5 flex justify-center text-2xl font-bold">
+          Register
+        </h2>
+
+        {/* Email */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="register_email" className="mb-2 block text-lg">
+            Email
+          </label>
+          <input
+            type="email"
+            id="register_email"
+            className="form-input h-8 w-full border pl-4 focus:outline-none"
+            autoComplete="off"
+            placeholder=""
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          {errors.email && (
+            <div className="text-l mx-auto mt-2 text-orange">
+              {errors.email}
+            </div>
+          )}
+        </div>
+
+        {/* Name */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="name" className="mb-2 block text-lg">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="form-input h-8 w-full border pl-4 focus:outline-none"
+            autoComplete="off"
+            placeholder=""
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          {errors.name && (
+            <div className="text-l mx-auto mt-2 text-orange">{errors.name}</div>
+          )}
+        </div>
+
+        {/* Password */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="register_password" className="mb-2 block text-lg">
+            Password
+          </label>
+          <input
+            type="password"
+            id="register_password"
+            className="form-input h-8 w-full border pl-4 focus:outline-none"
+            minLength="8"
+            autoComplete="off"
+            placeholder=""
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          {errors.password && (
+            <div className="text-l mx-auto mt-2 text-orange">
+              {errors.password}
+            </div>
+          )}
+        </div>
+
+        {/* Repeat Password */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="repeat_password" className="mb-2 block text-lg">
+            Repeat password
+          </label>
+          <input
+            type="password"
+            id="repeat_password"
+            className="form-input h-8 w-full border pl-4 focus:outline-none"
+            minLength="8"
+            autoComplete="off"
+            placeholder=""
+            name="repeatPassword"
+            value={formData.repeatPassword}
+            onChange={handleChange}
+            required
+          />
+          {errors.repeatPassword && (
+            <div className="text-l mx-auto mt-2 text-orange">
+              {errors.repeatPassword}
+            </div>
+          )}
+        </div>
+
+        {/* Avatar */}
+        <div className="mx-auto mb-4 w-1/2">
+          <label htmlFor="avatar" className="mb-2 block text-lg">
+            Avatar URL
+          </label>
+          <input
+            type="text"
+            id="avatar"
+            className="form-input h-8 w-full border pl-4 focus:outline-none"
+            autoComplete="off"
+            placeholder=""
+            name="avatar"
+            value={formData.avatar}
+            onChange={handleChange}
+          />
+          {errors.avatar && (
+            <div className="text-l mx-auto mt-2 text-orange">
+              {errors.avatar}
+            </div>
+          )}
+        </div>
+
+        {/* Venue Manager */}
+        <div className="mx-auto mb-4 flex w-1/2 items-center justify-center">
+          <input
+            type="checkbox"
+            id="isVenueManager"
+            name="isVenueManager"
+            className="form-checkbox mr-2 h-4 w-4"
+            checked={formData.isVenueManager}
+            onChange={handleChange}
+          />
+          <label htmlFor="isVenueManager" className="text-lg">
+            I am a Venue Manager
+          </label>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          id="register_button"
+          className="mx-auto border px-8 py-1 font-bold"
+        >
+          Register
+        </button>
+
+        {/* Cancel Button */}
+        <Link to="/login" className="mx-auto border px-8 py-1 font-bold">
+          Cancel
+        </Link>
+      </form>
+    </div>
   );
 }
 

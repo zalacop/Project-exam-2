@@ -42,7 +42,7 @@ function Login() {
             type="email"
             id="login_email"
             className="form-input h-8 w-full
-            border focus:outline-none pl-4"
+            border pl-4 focus:outline-none"
             autoComplete="off"
             placeholder=""
             name="email"
@@ -61,7 +61,7 @@ function Login() {
             type="password"
             id="login_password"
             className="form-input h-8 w-full
-            border focus:outline-none pl-4"
+            border pl-4 focus:outline-none"
             minLength="8"
             autoComplete="off"
             placeholder=""
