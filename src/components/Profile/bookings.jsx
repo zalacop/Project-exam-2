@@ -17,7 +17,7 @@ function MyBookings({ bookings }) {
                 className="h-36 w-36"
               />
             </div>
-            <div className="flex w-full flex-col items-center gap-2 md:w-2/3 md:items-start">
+            <div className="ml-2 flex w-full flex-col items-center gap-2 md:w-2/3 md:items-start">
               <h3 className="mb-2 text-center font-semibold md:text-left">
                 {booking.venue.name}
               </h3>
@@ -27,6 +27,9 @@ function MyBookings({ bookings }) {
               </p>
               <p className="text-center md:text-left">
                 Number of Guests: {booking.guests}
+              </p>
+              <p className="text-center md:text-left">
+              Price / Night: ${booking.venue.price}
               </p>
               <button className="border px-8 py-1 font-bold">Delete</button>
             </div>
