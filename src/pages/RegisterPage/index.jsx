@@ -16,17 +16,23 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     const { name, value, type, checked } = event.target;
 
-    const newValue = type === "checkbox" ? checked : value;
-    const finalValue = name === "isVenueManager" ? checked : newValue;
+    const finalValue = type === "checkbox" ? checked : value;
 
     setFormData((prevState) => ({
       ...prevState,
       [name]: finalValue,
     }));
-  };
+  }
+
+  function handleVenueManagerCheckboxChange(event) {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.checked,
+    });
+  }
 
   const validateURL = (url) => {
     try {
@@ -62,7 +68,6 @@ function Register() {
       isValid = false;
     }
 
-    // Validate Avatar (if not empty)
     if (formData.avatar.trim() !== "" && !validateURL(formData.avatar)) {
       errors.avatar = "Avatar must be a valid URL link!";
       isValid = false;
@@ -213,15 +218,14 @@ function Register() {
         {/* Venue Manager */}
         <div className="mx-auto mb-4 flex w-1/2 items-center justify-center">
           <input
+            onChange={handleVenueManagerCheckboxChange}
             type="checkbox"
-            id="isVenueManager"
-            name="isVenueManager"
+            name="venueManager"
+            id="venueManager"
             className="form-checkbox mr-2 h-4 w-4"
-            checked={formData.isVenueManager}
-            onChange={handleChange}
           />
-          <label htmlFor="isVenueManager" className="text-lg">
-            I am a Venue Manager
+          <label htmlFor="venueManager" className="text-lg">
+            Register as Venue Manager
           </label>
         </div>
 
