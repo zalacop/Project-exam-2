@@ -41,6 +41,7 @@ function FetchVenues() {
   data.forEach((venue) => {
     const city = venue.location.city;
     const country = venue.location.country;
+    const continent = venue.location.continent;
     const firstImage =
       venue.media && venue.media.length > 0 ? venue.media[0].url : null;
 
