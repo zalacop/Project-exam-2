@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/HomePage";
 import Venues from "./pages/VenuesPage";
@@ -8,20 +8,22 @@ import Profile from "./pages/ProfilePage";
 import SingleVenue from "./pages/SingleVenuePage";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="venues" element={<Venues />} />
-          <Route path="venue/:id" element={<SingleVenue />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { path: "/", element: <Home /> },
+        { path: "/venues", element: <Venues /> },
+        { path: "/venue/:id", element: <SingleVenue /> }, 
+        { path: "/login", element: <Login /> }, 
+        { path: "/register", element: <Register /> },
+        { path: "/profile", element: <Profile /> }
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
