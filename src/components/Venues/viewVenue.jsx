@@ -5,6 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
+import ImageGallery from "../ImageGallery";
+import MetaList from "../Meta";
 
 function ViewVenue() {
   const { id } = useParams();
@@ -23,6 +25,10 @@ function ViewVenue() {
     return <div>Error fetching data</div>;
   }
 
+  function isRangeBooked(startDate, endDate) {
+    return false;
+  }
+
   const handleDateChange = (dates) => {
     const [start, end] = dates;
     if (isRangeBooked(start, end)) {
@@ -34,56 +40,41 @@ function ViewVenue() {
     }
   };
 
-  // Function to check if a date range is booked
-  const isRangeBooked = (start, end) => {
-    // Logic to check if the date range overlaps with any existing bookings
-  };
-
-  // Function to format date string
-  const formatDateString = (date) => {
-    return date instanceof Date && !isNaN(date)
-      ? date.toLocaleDateString()
-      : "";
-  };
-
   return (
-    <>
+    <div className="container mx-auto mt-20 pt-10">
       {data && (
-        <div>
-          <h2>{data.name}</h2>
+        <>
+          <h2 className="mt-5 text-2xl font-bold">{data.name}</h2>
           <span>{data.rating}</span>
-          {data.location && (
-            <div>
-              <p>{data.location.address}</p>
-              <p>{data.location.city}</p>
-              <p>{data.location.country}</p>
-            </div>
-          )}
-        </div>
+          <div className="flex flex-wrap">
+            {data.location ? (
+              <>
+                <p className="mr-2 text-lg">{data.location.address},</p>
+                <p className="mr-2 text-lg">{data.location.city},</p>
+                <p className="mr-2 text-lg">
+                  {data.location.country || "Mystery Destination!"}
+                </p>
+              </>
+            ) : (
+              <p className="mr-2 text-lg">Mystery Destination!</p>
+            )}
+          </div>
+        </>
       )}
 
-      {data && data.media && data.media.length > 0 && (
-        <div>
-          <img src={data.media[0]?.url} alt={data.media[0]?.alt} />
-          <div>
-            {data.media.length > 1 && (
-              <img src={data.media[1]?.url} alt={data.media[1]?.alt} />
-            )}
-            <button>Show More</button>
-          </div>
-        </div>
-      )}
+      <ImageGallery data={data} />
 
       {data && data.meta && (
-        <div>
-          <div>
-            <p>Wifi: {data.meta.wifi ? "Yes" : "No"}</p>
-            <p>Parking: {data.meta.parking ? "Yes" : "No"}</p>
-            <p>Breakfast: {data.meta.breakfast ? "Yes" : "No"}</p>
-            <p>Pets: {data.meta.pets ? "Allowed" : "Not Allowed"}</p>
+        <div className="mx-auto mb-10 flex w-[70%] flex-col items-center justify-between gap-5 sm:flex-row">
+          <MetaList data={data} />
+          <div className="flex flex-col">
+            <p className="mx-auto text-lg font-semibold">{data.price}$</p>
+            <p>per night</p>
           </div>
-          <p>{data.price}$ per night</p>
-          <p>Max Guests: {data.maxGuests}</p>
+          <div className="flex gap-2">
+            <p className="text-lg font-semibold">Max Guests: </p>
+            <p className="text-lg">{data.maxGuests}</p>
+          </div>
         </div>
       )}
 
@@ -93,9 +84,11 @@ function ViewVenue() {
         </div>
       )}
 
-      <button>Book Now</button>
+      <button className="mx-auto my-10 flex border px-8 py-1 font-bold">
+        Book Now
+      </button>
 
-      <div>
+      <div className="z-40">
         <DatePicker
           selected={startDate}
           onChange={handleDateChange}
@@ -108,7 +101,7 @@ function ViewVenue() {
           monthsShown={2}
         />
       </div>
-    </>
+    </div>
   );
 }
 
