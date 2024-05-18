@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import getProfile from "../../components/API/Profile";
 import MyVenues from "../../components/Profile/venues";
 import MyBookings from "../../components/Profile/bookings";
+import EditProfile from "../../components/Profile/editProfile";
 
 function Profile() {
   const location = useLocation();
@@ -12,6 +13,7 @@ function Profile() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const refresh = localStorage.getItem("profileRefreshed");
@@ -26,19 +28,39 @@ function Profile() {
     if (!accessToken) {
       navigate("/login");
     } else {
-      async function fetchProfile() {
-        try {
-          const profileData = await getProfile();
-          const userProfile = profileData.data;
-          setProfile(userProfile);
-          setAccessToken(localStorage.getItem("accessToken"));
-        } catch (error) {
-          console.log(error);
-        }
-      }
       fetchProfile();
     }
   }, [accessToken, navigate]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [isModalOpen]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const fetchProfile = async () => {
+    try {
+      const profileData = await getProfile();
+      const userProfile = profileData.data;
+      setProfile(userProfile);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleProfileUpdate = async () => {
+    await fetchProfile();
+  };
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -55,17 +77,27 @@ function Profile() {
             alt={avatar.alt}
             className="mx-auto mb-4 h-60 w-60 md:mb-0"
           />
-          <button className="mx-auto w-max border px-8 py-1 font-bold">
+          <button
+            className="mx-auto w-max border px-8 py-1 font-bold"
+            onClick={openModal}
+          >
             Edit Profile
           </button>
         </div>
+
+        <EditProfile
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          onProfileUpdate={handleProfileUpdate}
+        />
+
         <div className="my-auto border p-10 px-20 text-center md:text-left">
           <div className="mx-auto sm:w-3/4">
             <p className="mb-2">Email: {email}</p>
             <p className="mb-2">Name: {name}</p>
             <p className="mb-2">Venue Manager: {venueManager ? "Yes" : "No"}</p>
             {venueManager && (
-              <button className="mx-auto w-max border px-8 py-1 font-bold">
+              <button className="mx-auto mr-10 w-max border px-8 py-1 font-bold sm:mr-0">
                 Create New Venue
               </button>
             )}

@@ -53,7 +53,7 @@ function FetchVenues() {
             id: venue.id,
             city,
             image: firstImage,
-          }); 
+          });
           break;
         case country === "Spain":
           categorizedData.spainCities.push({

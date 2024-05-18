@@ -3,9 +3,9 @@ import React from "react";
 function MetaItem({ label, value }) {
   return (
     <p
-      className={`border ${value ? "border-dark-green" : "border-orange"} mx-auto w-20 py-2 text-center`}
+      className={`border ${value ? "border-dark-green" : "border-orange"} mx-auto w-full px-5 py-2 text-center`}
     >
-      {label}
+      {value ? label : `No ${label}`}
     </p>
   );
 }

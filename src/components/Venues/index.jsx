@@ -32,7 +32,7 @@ function VenueCard({ venues }) {
                 : venue.description}
             </p>
             <Link to={`/venue/${venue.id}`}>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white mt-2 px-4 py-2 font-bold ">
+              <button className="mx-auto w-max border px-8 py-1 font-bold">
                 Show More
               </button>
             </Link>
