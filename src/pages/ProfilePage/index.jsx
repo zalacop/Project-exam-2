@@ -4,6 +4,7 @@ import getProfile from "../../components/API/Profile";
 import MyVenues from "../../components/Profile/venues";
 import MyBookings from "../../components/Profile/bookings";
 import EditProfile from "../../components/Profile/editProfile";
+import CreateVenue from "../../components/ManageVenues/newVenue";
 
 function Profile() {
   const location = useLocation();
@@ -13,7 +14,9 @@ function Profile() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isCreateVenueModalOpen, setIsCreateVenueModalOpen] = useState(false);
 
   useEffect(() => {
     const refresh = localStorage.getItem("profileRefreshed");
@@ -32,20 +35,20 @@ function Profile() {
     }
   }, [accessToken, navigate]);
 
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
-    }
-  }, [isModalOpen]);
-
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const openCreateVenueModal = () => {
+    setIsCreateVenueModalOpen(true);
+  };
+
+  const closeCreateVenueModal = () => {
+    setIsCreateVenueModalOpen(false);
   };
 
   const fetchProfile = async () => {
@@ -82,15 +85,15 @@ function Profile() {
           />
           <button
             className="mx-auto w-max border px-8 py-1 font-bold"
-            onClick={openModal}
+            onClick={openEditModal}
           >
             Edit Profile
           </button>
         </div>
 
         <EditProfile
-          isModalOpen={isModalOpen}
-          closeModal={closeModal}
+          isModalOpen={isEditModalOpen}
+          closeModal={closeEditModal}
           onProfileUpdate={handleProfileUpdate}
         />
 
@@ -100,13 +103,21 @@ function Profile() {
             <p className="mb-2">Name: {name}</p>
             <p className="mb-2">Venue Manager: {venueManager ? "Yes" : "No"}</p>
             {venueManager && (
-              <button className="mx-auto mr-10 w-max border px-8 py-1 font-bold sm:mr-0">
+              <button
+                className="mx-auto mr-10 w-max border px-8 py-1 font-bold sm:mr-0"
+                onClick={openCreateVenueModal}
+              >
                 Create New Venue
               </button>
             )}
           </div>
         </div>
       </div>
+
+      <CreateVenue
+        isModalOpen={isCreateVenueModalOpen}
+        closeModal={closeCreateVenueModal}
+      />
 
       <div>
         {venueManager && venues && venues.length > 0 && (

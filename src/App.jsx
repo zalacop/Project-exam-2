@@ -6,7 +6,7 @@ import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import Profile from "./pages/ProfilePage";
 import SingleVenue from "./pages/SingleVenuePage";
-import VenueBookings from "./pages/ViewVenueBookings";
+import VenueBookings from "./pages/ViewVenueBookingsPage";
 
 function App() {
   const router = createBrowserRouter([

@@ -49,7 +49,7 @@ function ViewBookings() {
           ))}
         </div>
       ) : (
-        <div>No bookings available.</div>
+        <div className="text-xl">The venue has no bookings!</div>
       )}
     </div>
   );
