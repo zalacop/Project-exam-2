@@ -12,11 +12,11 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
     };
 
     const avatar = parseJSON(localStorage.getItem("avatar"), { url: "", alt: "" });
-    const initialVenueManager = parseJSON(localStorage.getItem("venueManager"), false);
+    const venueManager = parseJSON(localStorage.getItem("venueManager"), false);
 
     const [editForm, setEditForm] = useState({
         newAvatar: avatar,
-        venueManager: initialVenueManager,
+        venueManager: venueManager,
     });
 
     useEffect(() => {
