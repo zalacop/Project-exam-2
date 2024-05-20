@@ -53,6 +53,9 @@ function Profile() {
       const profileData = await getProfile();
       const userProfile = profileData.data;
       setProfile(userProfile);
+      localStorage.setItem("avatarUrl", userProfile.avatar.url);
+      localStorage.setItem("avatarAlt", userProfile.avatar.alt);
+      localStorage.setItem("venueManager", userProfile.venueManager);
     } catch (error) {
       console.log(error);
     }
