@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function MyVenues({ venues }) {
   return (
@@ -9,6 +10,7 @@ function MyVenues({ venues }) {
           <div key={id} className="border p-4 shadow-md">
             <div className="flex flex-col items-center justify-center md:flex-row">
               <div className="mb-4 flex w-full flex-col items-center justify-between md:mb-0 md:mr-4 md:w-1/2">
+              <Link to={`/venue/${venue.id}`}>
                 <img
                   className="mb-4 h-36 w-36 object-cover"
                   src={venue.media[0].url}
@@ -17,6 +19,7 @@ function MyVenues({ venues }) {
                 <h3 className="text-l mb-4 break-words text-center font-semibold md:mb-0">
                   {venue.name}
                 </h3>
+                </Link>
               </div>
               <div className="flex w-full flex-col items-center justify-between md:w-1/2">
                 <div className="my-auto flex flex-col items-center justify-center gap-3">
@@ -26,9 +29,9 @@ function MyVenues({ venues }) {
                   <button className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2">
                     Delete
                   </button>
-                  <button className="border px-8 py-1 font-bold">
-                    View Bookings
-                  </button>
+                  <Link to={`/venue/bookings/${venue.id}`}>
+                    <button className="border px-8 py-1 font-bold">View Bookings</button>
+                  </Link>
                 </div>
               </div>
             </div>

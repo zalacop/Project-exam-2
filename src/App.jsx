@@ -6,6 +6,7 @@ import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import Profile from "./pages/ProfilePage";
 import SingleVenue from "./pages/SingleVenuePage";
+import VenueBookings from "./pages/ViewVenueBookings";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
         { path: "/profile", element: <Profile /> },
+        { path: "/venue/bookings/:id", element: <VenueBookings /> },
       ],
     },
   ]);
