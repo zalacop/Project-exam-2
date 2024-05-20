@@ -11,13 +11,17 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
         }
     };
 
-    const avatar = parseJSON(localStorage.getItem("avatar"), { url: "", alt: "" });
-    const venueManager = parseJSON(localStorage.getItem("venueManager"), false);
-
+    const defaultAvatar = { url: "", alt: "" };
+    const defaultVenueManager = false;
+    
+    const avatar = parseJSON(localStorage.getItem("avatar"), defaultAvatar);
+    const venueManager = parseJSON(localStorage.getItem("venueManager"), defaultVenueManager);
+    
     const [editForm, setEditForm] = useState({
-        newAvatar: avatar,
-        venueManager: venueManager,
+        newAvatar: avatar || defaultAvatar,
+        venueManager: venueManager || defaultVenueManager,
     });
+    
 
     useEffect(() => {
         localStorage.setItem("avatar", JSON.stringify(editForm.newAvatar));
@@ -45,10 +49,20 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await putProfile({
-                avatar: editForm.newAvatar,
-                venueManager: editForm.venueManager,
-            });
+            const profileUpdates = {};
+            if (editForm.newAvatar.url !== "" || editForm.newAvatar.alt !== "") {
+                profileUpdates.avatar = editForm.newAvatar;
+            }
+            if (editForm.venueManager !== venueManager) {
+                profileUpdates.venueManager = editForm.venueManager;
+            }
+    
+            if (Object.keys(profileUpdates).length === 0) {
+                closeModal();
+                return;
+            }
+    
+            await putProfile(profileUpdates);
             alert("Profile updated successfully!");
             onProfileUpdate();
             closeModal();
@@ -57,6 +71,7 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
             console.error(error);
         }
     };
+    
 
     if (!isModalOpen) return null;
 
