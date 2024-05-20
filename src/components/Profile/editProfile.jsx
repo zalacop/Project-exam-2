@@ -53,11 +53,11 @@ function EditProfile({ isModalOpen, closeModal }) {
                 Avatar URL
               </label>
               <input
-                type="text"
+                type="url"
                 id="avatarUrl"
                 className="form-input h-8 w-full border pl-4 focus:outline-none"
                 autoComplete="off"
-                placeholder="Enter avatar URL"
+                placeholder=""
                 name="avatar"
                 value={newFormData.avatar.url}
                 onChange={handleChange}
@@ -74,7 +74,7 @@ function EditProfile({ isModalOpen, closeModal }) {
                 id="avatarAlt"
                 className="form-input h-8 w-full border pl-4 focus:outline-none"
                 autoComplete="off"
-                placeholder="Enter avatar alt text"
+                placeholder=""
                 name="avatarAlt"
                 value={newFormData.avatar.alt}
                 onChange={handleChange}
@@ -97,7 +97,7 @@ function EditProfile({ isModalOpen, closeModal }) {
             </div>
 
             <button type="submit" className="mx-auto w-max border px-8 py-1 font-bold flex">
-              Submit
+              Save
             </button>
           </form>
         </div>
