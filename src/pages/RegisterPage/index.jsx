@@ -248,7 +248,7 @@ function Register() {
 }
 
 const validateEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@stud\.noroff\.no$/;
   return emailRegex.test(String(email).toLowerCase());
 };
 
