@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
 import ImageGallery from "../ImageGallery";
 import MetaList from "../Meta";
+import Calendar from "../Calandar";
 
 function ViewVenue() {
   const { id } = useParams();
   const { data, isLoading, isError } = useApi(
     `${holidazeUrls.urlVenues}/${id}?_owner=true&_bookings=true`,
   );
-
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -25,19 +21,41 @@ function ViewVenue() {
     return <div>Error fetching data</div>;
   }
 
-  function isRangeBooked(startDate, endDate) {
-    return false;
-  }
+  const isRangeBooked = (startDate, endDate) => {
+    if (!data || !data.bookings) return false;
 
-  const handleDateChange = (dates) => {
-    const [start, end] = dates;
-    if (isRangeBooked(start, end)) {
-      setStartDate(null);
-      setEndDate(null);
-    } else {
-      setStartDate(start);
-      setEndDate(end);
+    for (const booking of data.bookings) {
+      const bookingStart = new Date(booking.dateFrom);
+      const bookingEnd = new Date(booking.dateTo);
+
+      if (
+        (startDate >= bookingStart && startDate <= bookingEnd) ||
+        (endDate >= bookingStart && endDate <= bookingEnd) ||
+        (startDate <= bookingStart && endDate >= bookingEnd)
+      ) {
+        return true;
+      }
     }
+    return false;
+  };
+
+  const getDisabledDates = () => {
+    if (!data || !data.bookings) return [];
+    const disabledDates = [];
+
+    data.bookings.forEach((booking) => {
+      const bookingStart = new Date(booking.dateFrom);
+      const bookingEnd = new Date(booking.dateTo);
+
+      let currentDate = new Date(bookingStart);
+
+      while (currentDate <= bookingEnd) {
+        disabledDates.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+    });
+
+    return disabledDates;
   };
 
   return (
@@ -88,19 +106,10 @@ function ViewVenue() {
         Book Now
       </button>
 
-      <div className="z-40">
-        <DatePicker
-          selected={startDate}
-          onChange={handleDateChange}
-          startDate={startDate}
-          endDate={endDate}
-          selectsRange
-          inline
-          minDate={new Date()}
-          filterDate={(date) => !isRangeBooked(date)}
-          monthsShown={2}
-        />
-      </div>
+      <Calendar
+        isRangeBooked={isRangeBooked}
+        disabledDates={getDisabledDates()}
+      />
     </div>
   );
 }

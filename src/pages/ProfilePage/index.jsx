@@ -5,7 +5,6 @@ import MyVenues from "../../components/Profile/venues";
 import MyBookings from "../../components/Profile/bookings";
 import EditProfile from "../../components/Profile/editProfile";
 import CreateVenue from "../../components/ManageVenues/newVenue";
-import holidazeUrls from "../../utils/url";
 
 function Profile() {
   const location = useLocation();
