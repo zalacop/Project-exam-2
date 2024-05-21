@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import deleteVenue from "../API/Venue/deleteVenue";
+import UpdateVenue from "../ManageVenues/update";
 
 function MyVenues({ venues }) {
   const [message, setMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [updateVenue, setUpdateVenue] = useState(null);
+
+  const handleEdit = (venue) => {
+    setUpdateVenue(venue);
+    setIsModalOpen(true);
+  };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this venue?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this venue?",
+    );
     if (confirmDelete) {
       try {
         await deleteVenue(id);
-        window.location.reload(); 
+        window.location.reload();
       } catch (error) {
         console.error(error);
         setMessage("Failed to delete venue. Please try again!");
@@ -21,7 +32,9 @@ function MyVenues({ venues }) {
   return (
     <div className="mx-auto my-20 w-5/6 border px-10 py-8">
       <h2 className="mb-4 text-xl font-bold">My Venues</h2>
-      {message && <div className="mb-4 text-center text-green-500">{message}</div>}
+      {message && (
+        <div className="text-green-500 mb-4 text-center">{message}</div>
+      )}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {venues.map((venue, id) => (
           <div key={id} className="border p-4 shadow-md">
@@ -40,7 +53,10 @@ function MyVenues({ venues }) {
               </div>
               <div className="flex w-full flex-col items-center justify-between md:w-1/2">
                 <div className="my-auto flex flex-col items-center justify-center gap-3">
-                  <button className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2">
+                  <button
+                    className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2"
+                    onClick={() => handleEdit(venue)}
+                  >
                     Edit Venue
                   </button>
                   <button
@@ -60,6 +76,14 @@ function MyVenues({ venues }) {
           </div>
         ))}
       </div>
+      {/* Modal for updating venue */}
+      {isModalOpen && (
+        <UpdateVenue
+          venueData={updateVenue}
+          isModalOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)} // Close modal function
+        />
+      )}
     </div>
   );
 }

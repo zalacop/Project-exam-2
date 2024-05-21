@@ -1,7 +1,7 @@
 import holidazeUrls from "../../../utils/url";
 import CreateApiKey from "../ApiKey";
 
-async function deleteVenue(id) {
+async function putVenue(id, newData) {
   try {
     const apiKeyData = await CreateApiKey();
     const apiKey = apiKeyData.data.key;
@@ -9,26 +9,28 @@ async function deleteVenue(id) {
     const url = `${holidazeUrls.urlVenues}/${id}`;
 
     const options = {
-      method: "DELETE",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
         "X-Noroff-API-Key": apiKey,
       },
+      body: JSON.stringify(newData),
     };
 
     const response = await fetch(url, options);
+    const responseData = await response.json();
 
     if (!response.ok) {
-      console.error("Failed to delete venue!");
-      throw new Error("Failed to delete venue!");
+      console.error("Failed to update the venue!");
+      throw new Error("Failed to update the venue!");
     }
 
-    return {};
+    return responseData;
   } catch (error) {
-    console.error(error);
+    console.log(error);
     throw error;
   }
 }
 
-export default deleteVenue;
+export default putVenue;
