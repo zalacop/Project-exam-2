@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 
+import postVenue from "../API/Venue/createVenue";
+
 function CreateVenue({ isModalOpen, closeModal }) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     media: [{ url: "", alt: "" }],
-    price: "",
-    maxGuests: "",
-    rating: "",
+    price: 0,
+    maxGuests: 0,
+    rating: 0,
     meta: {
       wifi: false,
       breakfast: false,
@@ -22,10 +24,16 @@ function CreateVenue({ isModalOpen, closeModal }) {
     },
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Venue added!", formData);
-    closeModal();
+    try {
+      const newVenue = await postVenue(formData);
+      closeModal();
+      alert("You have successfully created a venue!");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChange = (event, index) => {
@@ -35,18 +43,13 @@ function CreateVenue({ isModalOpen, closeModal }) {
     if (type === "checkbox") {
       setFormData((prevData) => ({
         ...prevData,
-        amenities: {
-          ...prevData.amenities,
+        meta: {
+          ...prevData.meta,
           [name]: checked,
         },
       }));
     } else if (mainKey === "media") {
-      const newMedia = [...formData.media];
-      newMedia[index][subKey] = value;
-      setFormData((prevData) => ({
-        ...prevData,
-        media: newMedia,
-      }));
+      handleChangeMedia(event, index);
     } else if (mainKey === "location") {
       setFormData((prevData) => ({
         ...prevData,
@@ -56,9 +59,13 @@ function CreateVenue({ isModalOpen, closeModal }) {
         },
       }));
     } else {
+      const numericValue =
+        name === "price" || name === "maxGuests" || name === "rating"
+          ? Number(value)
+          : value;
       setFormData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: numericValue,
       }));
     }
   };
@@ -77,6 +84,16 @@ function CreateVenue({ isModalOpen, closeModal }) {
     }));
   };
 
+  const handleChangeMedia = (event, index) => {
+    const { name, value } = event.target;
+    const newMedia = [...formData.media];
+    newMedia[index][name.split(".")[1]] = value;
+    setFormData((prevData) => ({
+      ...prevData,
+      media: newMedia,
+    }));
+  };
+
   if (!isModalOpen) return null;
 
   return (
@@ -87,9 +104,9 @@ function CreateVenue({ isModalOpen, closeModal }) {
           <IoClose onClick={closeModal} className="close-button" />
           <form
             onSubmit={handleSubmit}
-            className="mx-auto flex w-2/3 flex-col justify-center gap-3 bg-background py-20"
+            className="mx-auto flex w-2/3 flex-col justify-center gap-3 bg-background pb-20 pt-10"
           >
-            <h2 className="my-5 flex justify-center text-2xl font-bold">
+            <h2 className="mb-5 mt-2 flex justify-center text-2xl font-bold">
               Create New Venue
             </h2>
 
@@ -97,12 +114,12 @@ function CreateVenue({ isModalOpen, closeModal }) {
               <h3 className="mx-auto mb-2 text-lg font-semibold">Venue info</h3>
               {/* Name */}
               <div className="mx-auto mb-4 w-full md:w-1/2">
-                <label htmlFor="register_name" className="mb-2 block text-lg">
+                <label htmlFor="name" className="mb-2 block text-lg">
                   Name
                 </label>
                 <input
                   type="text"
-                  id="register_name"
+                  id="name"
                   className="form-input h-8 w-full border pl-4 focus:outline-none"
                   autoComplete="off"
                   placeholder=""
@@ -125,7 +142,7 @@ function CreateVenue({ isModalOpen, closeModal }) {
                   placeholder=""
                   rows="4"
                   cols="10"
-                  maxLength={200}
+                  maxLength={600}
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
@@ -139,39 +156,36 @@ function CreateVenue({ isModalOpen, closeModal }) {
               <h3 className="mx-auto mb-2 text-lg font-semibold">
                 Image and Image Description
               </h3>
-              {formData.media.map((mediaItem, index) => (
-                <div
-                  key={index}
-                  className="mx-auto mb-4 flex w-1/2 items-center"
-                >
+              {formData.media.map((image, id) => (
+                <div key={id} className="mx-auto mb-4 flex w-1/2 items-center">
                   <input
                     type="url"
-                    id={`image_url_${index}`}
+                    id={`image_url_${id}`}
                     className="form-input mr-2 w-1/2 flex-1 border p-2 focus:outline-none "
                     autoComplete="off"
                     placeholder="Image URL"
                     name="media.url"
-                    value={mediaItem.url}
-                    onChange={(e) => handleChange(e, index)}
+                    value={image.url}
+                    onChange={(event) => handleChange(event, id)}
                     required
                   />
                   <input
                     type="text"
-                    id={`image_alt_${index}`}
+                    id={`image_alt_${id}`}
                     className="form-input mr-2 w-1/2 flex-1 border p-2 focus:outline-none"
                     autoComplete="off"
                     placeholder="Image Description"
                     name="media.alt"
-                    value={mediaItem.alt}
-                    onChange={(e) => handleChange(e, index)}
+                    value={image.alt}
+                    onChange={(event) => handleChange(event, id)}
                     required
                   />
-                  {index === formData.media.length - 1 &&
+                  {id === formData.media.length - 1 &&
                     formData.media.length > 1 && (
                       <button
                         type="button"
-                        onClick={() => removeMedia(index)}
-                        className="bg-red-500 text-white ml-2 px-4 py-2 "
+                        onClick={() => removeMedia(id)}
+                        className="ml-2 border px-2 py-1 font-semibold"
                       >
                         Remove
                       </button>
@@ -181,7 +195,7 @@ function CreateVenue({ isModalOpen, closeModal }) {
               <button
                 type="button"
                 onClick={addMedia}
-                className="bg-blue-500 text-white rounded px-4 py-2"
+                className="mx-auto border px-8 py-1 font-bold"
               >
                 Add Image
               </button>
@@ -378,7 +392,6 @@ function CreateVenue({ isModalOpen, closeModal }) {
             {/* Post Button */}
             <button
               type="submit"
-              id="register_button"
               className="mx-auto border px-8 py-1 font-bold"
             >
               Post
