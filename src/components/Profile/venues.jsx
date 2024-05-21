@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import deleteVenue from "../API/Venue/deleteVenue";
 
 function MyVenues({ venues }) {
+  const [message, setMessage] = useState("");
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this venue?");
+    if (confirmDelete) {
+      try {
+        await deleteVenue(id);
+        window.location.reload(); 
+      } catch (error) {
+        console.error(error);
+        setMessage("Failed to delete venue. Please try again!");
+      }
+    }
+  };
+
   return (
     <div className="mx-auto my-20 w-5/6 border px-10 py-8">
       <h2 className="mb-4 text-xl font-bold">My Venues</h2>
+      {message && <div className="mb-4 text-center text-green-500">{message}</div>}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {venues.map((venue, id) => (
           <div key={id} className="border p-4 shadow-md">
@@ -26,7 +43,10 @@ function MyVenues({ venues }) {
                   <button className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2">
                     Edit Venue
                   </button>
-                  <button className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2">
+                  <button
+                    onClick={() => handleDelete(venue.id)}
+                    className="mb-2 border px-8 py-1 font-bold md:mb-0 md:mr-2"
+                  >
                     Delete
                   </button>
                   <Link to={`/venue/bookings/${venue.id}`}>
