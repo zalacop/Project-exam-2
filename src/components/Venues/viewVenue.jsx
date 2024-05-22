@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
@@ -7,6 +7,7 @@ import ImageGallery from "../ImageGallery";
 import MetaList from "../Meta";
 import Calendar from "../Calandar";
 import Booking from "../Forms/bookingVenue";
+import Rating from "../Rating";
 
 function ViewVenue() {
   const { id } = useParams();
@@ -60,12 +61,15 @@ function ViewVenue() {
   };
 
   return (
-    <div className="container mx-auto mt-20 pt-10">
+    <div className="container mx-auto mt-20 pt-10 w-[80%]">
+      <Link to="/venues">
+        <p className="ml-10 text-lg underline">Back to venues</p>
+      </Link>
       {data && (
         <>
-          <h2 className="mt-5 break-all text-2xl font-bold">{data.name}</h2>
-          <span>{data.rating}</span>
-          <div className="flex flex-wrap">
+          <h2 className="mt-5 mb-5 break-all text-2xl font-bold">{data.name}</h2>
+          <Rating rating={data.rating} />
+          <div className="flex flex-wrap mt-5">
             {data.location ? (
               <>
                 <p className="mr-2 text-lg">{data.location.address},</p>
