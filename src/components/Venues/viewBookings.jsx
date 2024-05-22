@@ -3,6 +3,7 @@ import formatDate from "../../utils/dateFormat";
 import { useParams } from "react-router";
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
+import { Link } from "react-router-dom";
 
 function ViewBookings() {
   const { id } = useParams();
@@ -19,13 +20,16 @@ function ViewBookings() {
   }
 
   return (
-    <div className="mx-auto mt-20 flex w-[90%] flex-col items-center justify-center">
-      <h2 className="my-5 mb-10 flex justify-center text-2xl font-bold">
+    <div className="mx-auto mt-20 flex w-[90%] flex-col items-start justify-center">
+      <Link to="/profile">
+        <p className="ml-10 text-lg underline">Back to profile</p>
+      </Link>
+      <h2 className="mx-auto my-5 mb-10 flex justify-center text-2xl font-bold">
         Bookings for {data && data.name}
       </h2>
 
       {data && data.bookings && data.bookings.length > 0 ? (
-        <div className="grid w-full max-w-screen-lg grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 gap-4 sm:grid-cols-2">
           {data.bookings.map((booking) => (
             <div key={booking.id} className="flex w-full border p-4">
               {booking.customer.avatar && booking.customer.avatar.url && (
