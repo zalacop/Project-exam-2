@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
+
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
 import ImageGallery from "../ImageGallery";

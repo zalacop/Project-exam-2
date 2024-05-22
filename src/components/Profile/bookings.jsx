@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom";
 import formatDate from "../../utils/dateFormat";
+import deleteBooking from "../API/Venue/deleteBooking";
 
 function MyBookings({ bookings }) {
+  async function handleDelete(id) {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this venue?",
+    );
+    if (confirmDelete) {
+      try {
+        await deleteBooking(id);
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+        setMessage("Failed to delete booking. Please try again!");
+      }
+    }
+  }
+
   return (
     <div className="mx-auto mb-20 w-5/6 border px-10 py-8">
       <h2 className="mb-4 text-xl font-bold">My Bookings</h2>
@@ -34,7 +50,12 @@ function MyBookings({ bookings }) {
               <p className="text-center md:text-left">
                 Price / Night: ${booking.venue.price}
               </p>
-              <button className="border px-8 py-1 font-bold">Delete</button>
+              <button
+                onClick={() => handleDelete(booking.id)}
+                className="border px-8 py-1 font-bold"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

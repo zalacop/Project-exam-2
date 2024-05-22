@@ -32,7 +32,6 @@ function Calendar({ startDate, endDate, isRangeBooked }) {
 
           return classes;
         }}
-        onChange={null}
       />
     </div>
   );
