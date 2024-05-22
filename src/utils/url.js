@@ -9,6 +9,7 @@ const holidazeUrls = {
   urlLogin: `${base}/auth/login`,
   urlApiKey: `${base}/auth/create-api-key`,
   urlProfile: `${holidazeBaseUrl}/profiles`,
+  urlBookings: `${holidazeBaseUrl}/bookings`,
 };
 
 export default holidazeUrls;

@@ -1,8 +1,9 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./calandar.css";
 
-const Calendar = ({ startDate, endDate, isRangeBooked, disabledDates }) => {
+function Calendar({ startDate, endDate, isRangeBooked }) {
   return (
     <div className="z-40 mx-auto mb-20 flex justify-center">
       <DatePicker
@@ -18,16 +19,23 @@ const Calendar = ({ startDate, endDate, isRangeBooked, disabledDates }) => {
             startDate && date.getTime() === startDate.getTime();
           const isEndDate = endDate && date.getTime() === endDate.getTime();
           const isCurrentlySelected = isStartDate || isEndDate;
-          return isBooked
-            ? "booked-date bg-orange"
-            : isCurrentlySelected
-              ? "bg-orange"
-              : "";
+
+          let classes = "";
+
+          if (isBooked) {
+            classes += " booked-date bg-orange text-white";
+          } else if (isCurrentlySelected) {
+            classes += " bg-orange text-white";
+          }
+
+          classes += " custom-hover-none";
+
+          return classes;
         }}
-        onSelect={null}
+        onChange={null}
       />
     </div>
   );
-};
+}
 
 export default Calendar;

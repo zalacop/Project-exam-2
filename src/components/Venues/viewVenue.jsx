@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
 import ImageGallery from "../ImageGallery";
 import MetaList from "../Meta";
 import Calendar from "../Calandar";
+import Booking from "../Forms/bookingVenue";
 
 function ViewVenue() {
   const { id } = useParams();
@@ -62,7 +62,7 @@ function ViewVenue() {
     <div className="container mx-auto mt-20 pt-10">
       {data && (
         <>
-          <h2 className="mt-5 text-2xl font-bold">{data.name}</h2>
+          <h2 className="mt-5 break-all text-2xl font-bold">{data.name}</h2>
           <span>{data.rating}</span>
           <div className="flex flex-wrap">
             {data.location ? (
@@ -98,13 +98,11 @@ function ViewVenue() {
 
       {data && (
         <div>
-          <p>{data.description}</p>
+          <p className="break-all">{data.description}</p>
         </div>
       )}
 
-      <button className="mx-auto my-10 flex border px-8 py-1 font-bold">
-        Book Now
-      </button>
+      <Booking data={data} id={id} bookedDates={getDisabledDates()} />
 
       <Calendar
         isRangeBooked={isRangeBooked}

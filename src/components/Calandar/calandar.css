@@ -1,0 +1,16 @@
+.booked-date {
+  background-color: "#BF4A30";
+}
+
+.bg-orange {
+  background-color: "#BF4A30";
+}
+
+.text-white {
+  color: white;
+}
+
+.custom-hover-none:hover {
+  background-color: inherit;
+  color: inherit;
+}
