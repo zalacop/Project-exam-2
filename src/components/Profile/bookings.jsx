@@ -5,7 +5,7 @@ import deleteBooking from "../API/Venue/deleteBooking";
 function MyBookings({ bookings }) {
   async function handleDelete(id) {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this venue?",
+      "Are you sure you want to delete this booking?",
     );
     if (confirmDelete) {
       try {
@@ -16,6 +16,14 @@ function MyBookings({ bookings }) {
         setMessage("Failed to delete booking. Please try again!");
       }
     }
+  }
+
+  function calculateTotalPrice(price, dateFrom, dateTo) {
+    const startDate = new Date(dateFrom);
+    const endDate = new Date(dateTo);
+    const timeDifference = endDate - startDate;
+    const daysBooked = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    return price * daysBooked;
   }
 
   return (
@@ -48,7 +56,12 @@ function MyBookings({ bookings }) {
                 Number of Guests: {booking.guests}
               </p>
               <p className="text-center md:text-left">
-                Price / Night: ${booking.venue.price}
+                Total Price: $
+                {calculateTotalPrice(
+                  booking.venue.price,
+                  booking.dateFrom,
+                  booking.dateTo,
+                )}
               </p>
               <button
                 onClick={() => handleDelete(booking.id)}

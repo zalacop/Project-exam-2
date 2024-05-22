@@ -40,6 +40,14 @@ function Booking({ data, id, bookedDates }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    const confirmBooking = window.confirm(
+      "Are you sure you want to book this venue?",
+    );
+
+    if (!confirmBooking) {
+      return;
+    }
+
     const bookingData = {
       venueId: id,
       dateFrom: checkInDate.toISOString(),

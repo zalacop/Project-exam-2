@@ -14,7 +14,7 @@ function MyVenues({ venues }) {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
+  async function handleDelete(id) {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this venue?",
     );
@@ -27,7 +27,7 @@ function MyVenues({ venues }) {
         setMessage("Failed to delete venue. Please try again!");
       }
     }
-  };
+  }
 
   return (
     <div className="mx-auto my-20 w-5/6 border px-10 py-8">
@@ -81,7 +81,7 @@ function MyVenues({ venues }) {
         <UpdateVenue
           venueData={updateVenue}
           isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)} // Close modal function
+          closeModal={() => setIsModalOpen(false)}
         />
       )}
     </div>
