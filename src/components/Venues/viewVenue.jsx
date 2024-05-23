@@ -11,7 +11,7 @@ import Rating from "../Rating";
 
 function ViewVenue() {
   const { id } = useParams();
-  const { data, isLoading, isError } = useApi(
+  const { data: responseData, isLoading, isError } = useApi(
     `${holidazeUrls.urlVenues}/${id}?_owner=true&_bookings=true`,
   );
 
@@ -19,9 +19,11 @@ function ViewVenue() {
     return <div>Loading...</div>;
   }
 
-  if (isError) {
+  if (isError || !responseData) {
     return <div>Error fetching data</div>;
   }
+
+  const { data, meta } = responseData;
 
   const isRangeBooked = (startDate, endDate) => {
     if (!data || !data.bookings) return false;
@@ -89,7 +91,7 @@ function ViewVenue() {
 
       <ImageGallery data={data} />
 
-      {data && data.meta && (
+      {data && meta && (
         <div className="mx-auto mb-10 flex w-[70%] flex-col items-center justify-between gap-5 sm:flex-row">
           <MetaList data={data} />
           <div className="flex flex-col">
@@ -109,10 +111,10 @@ function ViewVenue() {
         </div>
       )}
 
-<div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
-  <Booking data={data} id={id} bookedDates={getDisabledDates()} />
-  <Calendar isRangeBooked={isRangeBooked} disabledDates={getDisabledDates()} />
-</div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
+        <Booking data={data} id={id} bookedDates={getDisabledDates()} />
+        <Calendar isRangeBooked={isRangeBooked} disabledDates={getDisabledDates()} />
+      </div>
 
     </div>
   );

@@ -26,7 +26,7 @@ function MetaItem({ label, value, icon }) {
 
   return (
     <div
-      className={`border ${value ? "border-dark-green" : "border-orange"} mx-auto flex w-full items-center px-5 py-2 text-center`}
+      className={`border-2 ${value ? "border-dark-green" : "border-orange"} mx-auto flex w-full items-center px-5 py-2 text-center`}
     >
       {IconComponent && (
         <IconComponent className="mr-2" style={{ fontSize: iconSize }} />
@@ -35,6 +35,7 @@ function MetaItem({ label, value, icon }) {
     </div>
   );
 }
+
 
 function MetaList({ data }) {
   return (
