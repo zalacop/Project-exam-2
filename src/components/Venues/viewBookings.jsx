@@ -55,7 +55,7 @@ function ViewBookings() {
           ))}
         </div>
       ) : (
-        <div className="text-xl">{data && data.bookings ? "The venue has no bookings!" : "Loading..."}</div>
+        <div className="text-xl mx-auto">{data && data.bookings ? "The venue has no bookings!" : "Loading..."}</div>
       )}
     </div>
   );
