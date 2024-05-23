@@ -17,6 +17,7 @@ function Venues() {
   useEffect(() => {
     if (data) {
       console.log("Fetched data:", data);
+      console.log(data.data)
       if (data.meta) {
         console.log("Fetched metadata:", data.meta);
       } else {

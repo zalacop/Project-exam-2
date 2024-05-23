@@ -91,7 +91,7 @@ function ViewVenue() {
 
       <ImageGallery data={data} />
 
-      {data && meta && (
+      {data && (
         <div className="mx-auto mb-10 flex w-[70%] flex-col items-center justify-between gap-5 sm:flex-row">
           <MetaList data={data} />
           <div className="flex flex-col">

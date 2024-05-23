@@ -8,8 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 function FetchVenues() {
-  const { data, isLoading, isError } = useApi(
-    holidazeUrls.urlVenues + "?_owner=true&_bookings=true",
+  const { data: responseData, isLoading, isError } = useApi(
+    `${holidazeUrls.urlVenues}/?_owner=true&_bookings=true`,
   );
 
   if (isLoading) {
@@ -22,7 +22,7 @@ function FetchVenues() {
     };
   }
 
-  if (isError) {
+  if (isError || !responseData) {
     return {
       norwayCities: [],
       spainCities: [],
@@ -32,10 +32,11 @@ function FetchVenues() {
     };
   }
 
+  const { data } = responseData;
+
   const categorizedData = {
     norwayCities: [],
     spainCities: [],
-    germanyCities: [],
   };
 
   data.forEach((venue) => {
@@ -62,14 +63,6 @@ function FetchVenues() {
             image: firstImage,
           });
           break;
-        case country.includes("Germany"):
-        case country.includes("Tyskland"):
-          categorizedData.germanyCities.push({
-            id: venue.id,
-            city,
-            image: firstImage,
-          });
-          break;
         default:
           break;
       }
@@ -79,8 +72,9 @@ function FetchVenues() {
   return { ...categorizedData, isLoading: false, isError: false };
 }
 
+
 function HomeVenues() {
-  const { norwayCities, spainCities, germanyCities, isLoading, isError } =
+  const { norwayCities, spainCities, isLoading, isError } =
     FetchVenues();
 
   if (isLoading) {
@@ -165,29 +159,6 @@ function HomeVenues() {
         </section>
       )}
 
-      {germanyCities.length > 0 && (
-        <section className="my-8 py-5">
-          <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Germany</h2>
-          <div className="mx-auto w-3/4">
-            <Slider {...settings}>
-              {germanyCities.map((venue, index) => (
-                <div key={`${venue.city}-${index}`} className="h-full">
-                  <Link to={`/venue/${venue.id}`}>
-                    <div className="mx-2 h-64">
-                      <img
-                        src={venue?.image}
-                        alt={venue.city}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <h3 className="mx-3 mt-3 font-semibold">{venue.city}</h3>
-                  </Link>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </section>
-      )}
     </div>
   );
 }
