@@ -25,7 +25,9 @@ function MetaItem({ label, value, icon }) {
   }
 
   return (
-    <div className={`border ${value ? "border-dark-green" : "border-orange"} mx-auto w-full flex px-5 py-2 text-center items-center`}>
+    <div
+      className={`border ${value ? "border-dark-green" : "border-orange"} mx-auto flex w-full items-center px-5 py-2 text-center`}
+    >
       {IconComponent && (
         <IconComponent className="mr-2" style={{ fontSize: iconSize }} />
       )}
@@ -39,7 +41,11 @@ function MetaList({ data }) {
     <div className="grid grid-cols-2 gap-4">
       <MetaItem label="Wifi" value={data.meta.wifi} icon="Wifi" />
       <MetaItem label="Parking" value={data.meta.parking} icon="Parking" />
-      <MetaItem label="Breakfast" value={data.meta.breakfast} icon="Breakfast" />
+      <MetaItem
+        label="Breakfast"
+        value={data.meta.breakfast}
+        icon="Breakfast"
+      />
       <MetaItem label="Pets" value={data.meta.pets} icon="Pets" />
     </div>
   );

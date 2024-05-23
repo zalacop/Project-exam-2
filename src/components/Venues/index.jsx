@@ -27,7 +27,7 @@ function VenueCard({ venues }) {
             <div className="mt-2 flex items-center">
               <Rating rating={venue.rating} />
             </div>
-            <p className="mt-2 break-all mb-5">
+            <p className="mb-5 mt-2 break-all">
               {venue.description.length > 300
                 ? `${venue.description.substring(0, 300)}...`
                 : venue.description}

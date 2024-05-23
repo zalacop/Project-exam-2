@@ -77,10 +77,15 @@ function Booking({ data, id, bookedDates }) {
   }, [checkInDate, checkOutDate]);
 
   return (
-    <form className="border" onSubmit={handleFormSubmit}>
-      <div>
-        <p>Check in</p>
+    <form
+      className="my-10 flex flex-col gap-2 border py-10 shadow-lg"
+      onSubmit={handleFormSubmit}
+    >
+      <h2 className="font-bold text-lg mx-auto">Book this venue</h2>
+      <div className="mx-auto">
+        <p className="my-2">Check in</p>
         <DatePicker
+          className="border"
           selected={checkInDate}
           onChange={handleCheckInDateChange}
           showIcon
@@ -95,9 +100,10 @@ function Booking({ data, id, bookedDates }) {
           }
         />
       </div>
-      <div>
-        <p>Check out</p>
+      <div className="mx-auto">
+        <p className="my-2">Check out</p>
         <DatePicker
+          className="border"
           selected={checkOutDate}
           onChange={(date) => setCheckOutDate(date)}
           minDate={checkInDate}
@@ -113,20 +119,30 @@ function Booking({ data, id, bookedDates }) {
           }
         />
       </div>
-      <div>
-        <p>How many guests will you be?</p>
+      <div className="mx-auto">
+        <p className="my-2">Number of guests</p>
         <input
+          className="w-full max-w-xs border px-3 py-1"
           type="number"
           value={numGuests}
           onChange={(e) => setNumGuests(e.target.value)}
           max={data.maxGuests}
         />
       </div>
-      <div>
-        <p>Total days: {totalDays}</p>
-        <h3>Total: {totalPrice}$</h3>
+      <div className="mx-auto mt-3">
+        <span className="flex gap-2">
+          <p>Total days: </p>
+          <p>{totalDays}</p>
+        </span>
+        <span className="flex items-center gap-2">
+          <h3 className="font-lg font-semibold">Total:</h3>
+          <p className="my-auto pt-1">{totalPrice}$</p>
+        </span>
       </div>
-      <button type="submit" className="my-10 flex border px-8 py-1 font-bold">
+      <button
+        type="submit"
+        className="mx-auto mt-5 flex border px-8 py-1 font-bold"
+      >
         Book Now
       </button>
     </form>

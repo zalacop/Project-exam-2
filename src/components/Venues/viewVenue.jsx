@@ -61,15 +61,17 @@ function ViewVenue() {
   };
 
   return (
-    <div className="container mx-auto mt-20 pt-10 w-[80%]">
+    <div className="container mx-auto mt-20 w-[90%] pt-10">
       <Link to="/venues">
         <p className="ml-10 text-lg underline">Back to venues</p>
       </Link>
       {data && (
         <>
-          <h2 className="mt-5 mb-5 break-all text-2xl font-bold">{data.name}</h2>
+          <h2 className="mb-5 mt-5 break-all text-2xl font-bold">
+            {data.name}
+          </h2>
           <Rating rating={data.rating} />
-          <div className="flex flex-wrap mt-5">
+          <div className="mt-5 flex flex-wrap">
             {data.location ? (
               <>
                 <p className="mr-2 text-lg">{data.location.address},</p>
@@ -103,16 +105,15 @@ function ViewVenue() {
 
       {data && (
         <div>
-          <p className="break-all">{data.description}</p>
+          <p className="break-all text-lg my-10 mx-auto w-[80%]">{data.description}</p>
         </div>
       )}
 
-      <Booking data={data} id={id} bookedDates={getDisabledDates()} />
+<div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
+  <Booking data={data} id={id} bookedDates={getDisabledDates()} />
+  <Calendar isRangeBooked={isRangeBooked} disabledDates={getDisabledDates()} />
+</div>
 
-      <Calendar
-        isRangeBooked={isRangeBooked}
-        disabledDates={getDisabledDates()}
-      />
     </div>
   );
 }
