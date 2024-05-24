@@ -39,6 +39,28 @@ h6 {
   font-family: theme("fontFamily.heading");
 }
 
+button,
+.cancel {
+  font-family: theme("fontFamily.cta");
+  transition:
+    filter 0.3s ease-in-out,
+    background 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: theme("colors.light-green");
+  color: theme("colors.background");
+  filter: drop-shadow(5px 5px 10px #29324f);
+}
+
+.cancel:hover,
+#delete:hover {
+  background-color: theme("colors.orange");
+  color: theme("colors.background");
+  filter: drop-shadow(5px 5px 10px #29324f);
+}
+
 .home-image {
   object-fit: cover;
   object-position: center;

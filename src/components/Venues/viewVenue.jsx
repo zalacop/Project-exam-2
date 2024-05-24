@@ -11,9 +11,11 @@ import Rating from "../Rating";
 
 function ViewVenue() {
   const { id } = useParams();
-  const { data: responseData, isLoading, isError } = useApi(
-    `${holidazeUrls.urlVenues}/${id}?_owner=true&_bookings=true`,
-  );
+  const {
+    data: responseData,
+    isLoading,
+    isError,
+  } = useApi(`${holidazeUrls.urlVenues}/${id}?_owner=true&_bookings=true`);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -107,15 +109,19 @@ function ViewVenue() {
 
       {data && (
         <div>
-          <p className="break-all text-lg my-10 mx-auto w-[80%]">{data.description}</p>
+          <p className="mx-auto my-10 w-[80%] break-all text-lg">
+            {data.description}
+          </p>
         </div>
       )}
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
+      <div className="grid w-full grid-cols-1 gap-10 xl:grid-cols-2">
         <Booking data={data} id={id} bookedDates={getDisabledDates()} />
-        <Calendar isRangeBooked={isRangeBooked} disabledDates={getDisabledDates()} />
+        <Calendar
+          isRangeBooked={isRangeBooked}
+          disabledDates={getDisabledDates()}
+        />
       </div>
-
     </div>
   );
 }

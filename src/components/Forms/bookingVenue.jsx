@@ -81,7 +81,7 @@ function Booking({ data, id, bookedDates }) {
       className="my-10 flex flex-col gap-2 border py-10 shadow-lg"
       onSubmit={handleFormSubmit}
     >
-      <h2 className="font-bold text-lg mx-auto">Book this venue</h2>
+      <h2 className="mx-auto text-lg font-bold">Book this venue</h2>
       <div className="mx-auto">
         <p className="my-2">Check in</p>
         <DatePicker
@@ -141,7 +141,7 @@ function Booking({ data, id, bookedDates }) {
       </div>
       <button
         type="submit"
-        className="mx-auto mt-5 flex border px-8 py-1 font-bold"
+        className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
       >
         Book Now
       </button>

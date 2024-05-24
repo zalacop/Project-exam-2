@@ -45,8 +45,8 @@ function Search({ onSearch }) {
 
   return (
     <>
-      <div className="w-full mx-auto flex flex-col my-auto items-center bg-dark-green py-5 pb-5">
-        <div className="w-1/3 relative">
+      <div className="mx-auto my-auto flex w-full flex-col items-center bg-dark-green py-5 pb-5">
+        <div className="relative w-1/3">
           <input
             type="search"
             name="search"
@@ -64,10 +64,10 @@ function Search({ onSearch }) {
           </div>
         </div>
       </div>
-      <div className="bg-background w-full">
-      <div className="bg-background w-full">
-        <VenueCard venues={searchResults} />
-      </div>
+      <div className="w-full bg-background">
+        <div className="w-full bg-background">
+          <VenueCard venues={searchResults} />
+        </div>
       </div>
     </>
   );

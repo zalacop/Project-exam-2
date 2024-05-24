@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 
 function ViewBookings() {
   const { id } = useParams();
-  const { data: venueData, isLoading, isError } = useApi(
-    `${holidazeUrls.urlVenues}/${id}?_bookings=true`,
-  );
+  const {
+    data: venueData,
+    isLoading,
+    isError,
+  } = useApi(`${holidazeUrls.urlVenues}/${id}?_bookings=true`);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -55,7 +57,9 @@ function ViewBookings() {
           ))}
         </div>
       ) : (
-        <div className="text-xl mx-auto">{data && data.bookings ? "The venue has no bookings!" : "Loading..."}</div>
+        <div className="mx-auto text-xl">
+          {data && data.bookings ? "The venue has no bookings!" : "Loading..."}
+        </div>
       )}
     </div>
   );

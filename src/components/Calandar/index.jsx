@@ -5,8 +5,8 @@ import "./calandar.css";
 
 function Calendar({ startDate, endDate, isRangeBooked }) {
   return (
-    <div className="z-40 flex flex-col mt-10 align-center mx-auto">
-      <h2 className="font-bold mb-5 text-lg mx-auto">Available dates</h2>
+    <div className="align-center z-40 mx-auto mt-10 flex flex-col">
+      <h2 className="mx-auto mb-5 text-lg font-bold">Available dates</h2>
       <DatePicker
         selected={startDate}
         selectsRange

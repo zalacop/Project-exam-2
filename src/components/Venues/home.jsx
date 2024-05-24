@@ -8,9 +8,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 function FetchVenues() {
-  const { data: responseData, isLoading, isError } = useApi(
-    `${holidazeUrls.urlVenues}/?_owner=true&_bookings=true`,
-  );
+  const {
+    data: responseData,
+    isLoading,
+    isError,
+  } = useApi(`${holidazeUrls.urlVenues}/?_owner=true&_bookings=true`);
 
   if (isLoading) {
     return {
@@ -72,10 +74,8 @@ function FetchVenues() {
   return { ...categorizedData, isLoading: false, isError: false };
 }
 
-
 function HomeVenues() {
-  const { norwayCities, spainCities, isLoading, isError } =
-    FetchVenues();
+  const { norwayCities, spainCities, isLoading, isError } = FetchVenues();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -158,7 +158,6 @@ function HomeVenues() {
           </div>
         </section>
       )}
-
     </div>
   );
 }

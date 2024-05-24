@@ -99,7 +99,8 @@ const VenueForm = ({
                       <button
                         type="button"
                         onClick={() => removeMedia(id)}
-                        className="ml-2 border px-2 py-1 font-semibold"
+                        className="mb-2 ml-2 border-4 border-orange px-1.5 py-1 font-semibold"
+                        id="delete"
                       >
                         Remove
                       </button>
@@ -109,7 +110,7 @@ const VenueForm = ({
               <button
                 type="button"
                 onClick={addMedia}
-                className="mx-auto border px-8 py-1 font-bold"
+                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
               >
                 Add Image
               </button>
@@ -304,7 +305,7 @@ const VenueForm = ({
             <div className="mx-auto flex w-1/2 justify-between">
               <button
                 type="submit"
-                className="mx-auto mt-5 w-1/2 border px-4 py-2 font-semibold"
+                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
               >
                 {isUpdate ? "Save" : "Post"}
               </button>

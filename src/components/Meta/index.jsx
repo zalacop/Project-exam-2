@@ -36,7 +36,6 @@ function MetaItem({ label, value, icon }) {
   );
 }
 
-
 function MetaList({ data }) {
   return (
     <div className="grid grid-cols-2 gap-4">

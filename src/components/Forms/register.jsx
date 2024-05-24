@@ -86,7 +86,7 @@ function RegisterForm() {
         const data = await RegisterUser(formData);
         navigate("/login");
       } catch (error) {
-        alert("Oops, something went wrong with registration!");
+        alert("This email or name is already taken!");
         console.log(error);
       }
     }
@@ -227,13 +227,16 @@ function RegisterForm() {
       <button
         type="submit"
         id="register_button"
-        className="mx-auto border px-8 py-1 font-bold"
+        className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
       >
         Register
       </button>
 
       {/* Cancel Button */}
-      <Link to="/login" className="mx-auto border px-8 py-1 font-bold">
+      <Link
+        to="/login"
+        className="cancel mx-auto border-4 border-orange px-8 py-1 font-semibold"
+      >
         Cancel
       </Link>
     </form>
