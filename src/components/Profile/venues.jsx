@@ -30,7 +30,7 @@ function MyVenues({ venues }) {
   }
 
   return (
-    <div className="mx-auto my-20 w-5/6 border px-10 py-8">
+    <div className="mx-auto my-20 w-5/6 border px-10 py-8 max-w-[1200px]">
       <h2 className="mb-4 text-xl font-bold">My Venues</h2>
       {message && (
         <div className="text-green-500 mb-4 text-center">{message}</div>

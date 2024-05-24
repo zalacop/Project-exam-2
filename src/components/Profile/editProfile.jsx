@@ -82,12 +82,13 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
       <div className="modal flex justify-center">
         <div className="modal-content h-[80%] w-[90%]">
           <IoClose onClick={closeModal} className="close-button" />
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}
+          className="max-w-[1000px] mx-auto">
             <h2 className="my-5 flex justify-center text-2xl font-bold">
               Edit Profile
             </h2>
 
-            <div className="mx-auto mb-4 w-1/2">
+            <div className="mx-auto mb-4 w-2/3">
               <label htmlFor="url" className="mb-2 block text-lg">
                 Avatar URL
               </label>
@@ -102,7 +103,7 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
               />
             </div>
 
-            <div className="mx-auto mb-4 w-1/2">
+            <div className="mx-auto mb-4 w-2/3">
               <label htmlFor="alt" className="mb-2 block text-lg">
                 Avatar Alt Text
               </label>
