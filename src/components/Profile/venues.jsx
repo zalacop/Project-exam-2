@@ -54,20 +54,20 @@ function MyVenues({ venues }) {
               <div className="flex w-full flex-col items-center justify-between md:w-1/2">
                 <div className="my-auto flex flex-col items-center justify-center gap-3">
                   <button
-                    className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+                    className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
                     onClick={() => handleEdit(venue)}
                   >
                     Edit Venue
                   </button>
                   <button
                     onClick={() => handleDelete(venue.id)}
-                    className="mb-2 border-4 border-orange px-8 py-1 font-bold font-semibold md:mb-0 md:mr-2"
+                    className="mb-2 border-4 border-orange px-6 py-0.5 font-bold font-semibold md:mb-0 md:mr-2"
                     id="delete"
                   >
                     Delete
                   </button>
                   <Link to={`/venue/bookings/${venue.id}`}>
-                    <button className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background">
+                    <button className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background">
                       View Bookings
                     </button>
                   </Link>

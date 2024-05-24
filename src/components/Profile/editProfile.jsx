@@ -133,7 +133,7 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
 
             <button
               type="submit"
-              className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background flex"
+              className="mx-auto flex w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
             >
               Save
             </button>

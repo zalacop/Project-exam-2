@@ -65,7 +65,7 @@ function MyBookings({ bookings }) {
               </p>
               <button
                 onClick={() => handleDelete(booking.id)}
-                className="mb-2 border-4 border-orange px-8 py-1 font-bold font-semibold text-dark md:mb-0 md:mr-2"
+                className="mb-2 border-4 border-orange px-6 py-0.5 font-bold font-semibold text-dark md:mb-0 md:mr-2"
                 id="delete"
               >
                 Delete

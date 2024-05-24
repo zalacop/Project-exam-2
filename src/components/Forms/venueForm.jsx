@@ -14,11 +14,11 @@ const VenueForm = ({
     <>
       <div className="modal-background"></div>
       <div className="modal flex justify-center">
-        <div className="modal-content h-[80%] w-[90%]">
+        <div className="modal-content h-[80%] w-[90%] max-w-[1000px]">
           <IoClose onClick={closeModal} className="close-button" />
           <form
             onSubmit={handleSubmit}
-            className="mx-auto flex w-2/3 flex-col justify-center gap-3 bg-background pb-20 pt-10"
+            className="b:w-2/3 mx-auto flex flex-col justify-center gap-3 bg-background pb-20 pt-10"
           >
             <h2 className="mb-5 mt-2 flex justify-center text-2xl font-bold">
               {isUpdate ? "Update Venue" : "Create New Venue"}
@@ -27,7 +27,7 @@ const VenueForm = ({
             <div className="flex flex-col border px-2 py-5">
               <h3 className="mx-auto mb-2 text-lg font-semibold">Venue info</h3>
               {/* Name */}
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <label htmlFor="name" className="mb-2 block text-lg">
                   Name
                 </label>
@@ -45,7 +45,7 @@ const VenueForm = ({
               </div>
 
               {/* Description */}
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <label htmlFor="description" className="mb-2 block text-lg">
                   Description
                 </label>
@@ -71,11 +71,17 @@ const VenueForm = ({
                 Image and Image Description
               </h3>
               {formData.media.map((image, id) => (
-                <div key={id} className="mx-auto mb-4 flex w-1/2 items-center">
+                <div
+                  key={id}
+                  className="mx-auto mb-4 flex w-full flex-col items-center md:w-1/2 md:flex-row"
+                >
+                  <label htmlFor={`image_url_${id}`} className="sr-only">
+                    Image URL
+                  </label>
                   <input
                     type="url"
                     id={`image_url_${id}`}
-                    className="form-input mr-2 w-1/2 flex-1 border p-2 focus:outline-none "
+                    className="form-input mb-2 w-1/2 w-full flex-1 border p-2 focus:outline-none md:mr-2 md:w-2/3"
                     autoComplete="off"
                     placeholder="Image URL"
                     name="media.url"
@@ -83,10 +89,13 @@ const VenueForm = ({
                     onChange={(event) => handleChange(event, id)}
                     required
                   />
+                  <label htmlFor={`image_alt_${id}`} className="sr-only">
+                    Image Description
+                  </label>
                   <input
                     type="text"
                     id={`image_alt_${id}`}
-                    className="form-input mr-2 w-1/2 flex-1 border p-2 focus:outline-none"
+                    className="form-input mb-2 w-1/2 w-full flex-1 border p-2 focus:outline-none md:mr-2 md:w-2/3"
                     autoComplete="off"
                     placeholder="Image Description"
                     name="media.alt"
@@ -99,7 +108,7 @@ const VenueForm = ({
                       <button
                         type="button"
                         onClick={() => removeMedia(id)}
-                        className="mb-2 ml-2 border-4 border-orange px-1.5 py-1 font-semibold"
+                        className="mb-2 mt-2 border-4 border-orange px-1.5 py-0.5 font-semibold md:ml-2"
                         id="delete"
                       >
                         Remove
@@ -110,7 +119,7 @@ const VenueForm = ({
               <button
                 type="button"
                 onClick={addMedia}
-                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
               >
                 Add Image
               </button>
@@ -121,7 +130,7 @@ const VenueForm = ({
                 Price & Guests
               </h3>
               {/* Price */}
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <label htmlFor="price" className="mb-2 block text-lg">
                   Price per night
                 </label>
@@ -141,7 +150,7 @@ const VenueForm = ({
               </div>
 
               {/* Max Guests */}
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <label htmlFor="max_guests" className="mb-2 block text-lg">
                   Max guests
                 </label>
@@ -161,7 +170,7 @@ const VenueForm = ({
               </div>
 
               {/* Rating */}
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <label htmlFor="rating" className="mb-2 block text-lg">
                   Rating of the venue
                 </label>
@@ -245,7 +254,7 @@ const VenueForm = ({
               <h3 className="mx-auto mb-2 text-lg font-semibold">
                 Venue Location
               </h3>
-              <div className="mx-auto mb-4 w-full md:w-1/2">
+              <div className="mx-auto mb-4 w-full md:w-2/3">
                 <div>
                   <label
                     htmlFor="location.address"

@@ -84,7 +84,7 @@ function Profile() {
             className="mx-auto mb-4 h-60 w-60 md:mb-0"
           />
           <button
-            className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+            className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
             onClick={openEditModal}
           >
             Edit Profile
@@ -104,7 +104,7 @@ function Profile() {
             <p className="mb-2">Venue Manager: {venueManager ? "Yes" : "No"}</p>
             {venueManager && (
               <button
-                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+                className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
                 onClick={openCreateVenueModal}
               >
                 Create New Venue
