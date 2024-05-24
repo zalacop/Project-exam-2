@@ -25,7 +25,7 @@ function LoginForm() {
 
   return (
     <form
-      className="mx-auto flex w-1/2 flex-col justify-center gap-3 border bg-background py-20 shadow-md"
+      className="mx-auto flex w-full flex-col justify-center gap-3 border bg-background py-20 shadow-md sm:w-[500px] md:w-[700px]"
       onSubmit={submitForm}
     >
       <h2 className="my-5 flex justify-center text-2xl font-bold">Log in</h2>

@@ -77,6 +77,7 @@ function UpdateVenue({ venueData, isModalOpen, closeModal }) {
       alert("You have successfully updated the venue!");
       window.location.reload();
     } catch (error) {
+      alert("Something went wrong! Please try again later!");
       console.error(error);
     }
   };

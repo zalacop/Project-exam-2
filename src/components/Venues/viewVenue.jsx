@@ -78,8 +78,12 @@ function ViewVenue() {
           <div className="mt-5 flex flex-wrap">
             {data.location ? (
               <>
-                <p className="mr-2 text-lg">{data.location.address},</p>
-                <p className="mr-2 text-lg">{data.location.city},</p>
+                {data.location.address && (
+                  <p className="mr-2 text-lg">{data.location.address},</p>
+                )}
+                {data.location.city && (
+                  <p className="mr-2 text-lg">{data.location.city},</p>
+                )}
                 <p className="mr-2 text-lg">
                   {data.location.country || "Mystery Destination!"}
                 </p>

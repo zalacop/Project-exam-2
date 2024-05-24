@@ -94,7 +94,7 @@ function Booking({ data, id, bookedDates }) {
 
   return (
     <form
-      className="mx-auto my-10 flex flex-col gap-2 border px-20 py-5 shadow-lg"
+      className="mx-auto my-auto flex flex-col gap-2 border px-20 py-5 shadow-lg"
       onSubmit={handleFormSubmit}
     >
       <h2 className="mx-auto text-lg font-bold">Book this venue</h2>
