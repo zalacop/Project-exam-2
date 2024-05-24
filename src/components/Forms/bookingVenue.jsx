@@ -37,8 +37,8 @@ function Booking({ data, id, bookedDates }) {
     setTotalDays(1);
   };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
     const confirmBooking = window.confirm(
       "Are you sure you want to book this venue?",
@@ -61,6 +61,7 @@ function Booking({ data, id, bookedDates }) {
       navigate("/profile");
     } catch (error) {
       console.error(error);
+      window.alert("Booking was unsuccessful! Please try again later.");
     }
 
     const days = Math.ceil(
@@ -76,9 +77,24 @@ function Booking({ data, id, bookedDates }) {
     setTotalDays(days);
   }, [checkInDate, checkOutDate]);
 
+  const accessToken = localStorage.getItem("accessToken");
+
+  if (!accessToken) {
+    return (
+      <div className="my-10 flex flex-col gap-2 border py-10 shadow-lg">
+        <h2 className="mx-auto text-lg font-bold">
+          Would you like to book this venue?
+        </h2>
+        <p className="mt-2 text-center">
+          Please log in to proceed with the booking.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form
-      className="my-10 flex flex-col gap-2 border py-10 shadow-lg"
+      className="mx-auto my-10 flex flex-col gap-2 border px-20 py-5 shadow-lg"
       onSubmit={handleFormSubmit}
     >
       <h2 className="mx-auto text-lg font-bold">Book this venue</h2>

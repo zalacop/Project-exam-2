@@ -76,8 +76,8 @@ function Profile() {
 
   return (
     <>
-      <div className="mx-auto mb-8 mt-20 flex flex-col justify-center gap-20 md:flex-row md:items-start max-w-[1200px] md:gap-5">
-        <div className="mb-4 flex flex-col gap-5 md:ml-20 md:mb-0 md:mr-8 md:justify-center md:text-center">
+      <div className="mx-auto mb-8 mt-20 flex max-w-[1200px] flex-col justify-center gap-20 md:flex-row md:items-start md:gap-5">
+        <div className="mb-4 flex flex-col gap-5 md:mb-0 md:ml-20 md:mr-8 md:justify-center md:text-center">
           <img
             src={avatar.url}
             alt={avatar.alt}
@@ -97,7 +97,7 @@ function Profile() {
           onProfileUpdate={handleProfileUpdate}
         />
 
-        <div className="my-auto border md:max-w-[450px] p-10 px-20 text-center md:text-left sm:w-[90%] mx-auto">
+        <div className="mx-auto my-auto border p-10 px-20 text-center sm:w-[90%] md:max-w-[450px] md:text-left">
           <div className="mx-auto sm:w-3/4">
             <p className="mb-2">Email: {email}</p>
             <p className="mb-2">Name: {name}</p>

@@ -58,7 +58,7 @@ const ImageGallery = ({ data }) => {
               <div className="flex justify-center">
                 <button
                   onClick={openModal}
-                  className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+                  className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
                 >
                   Show More
                 </button>

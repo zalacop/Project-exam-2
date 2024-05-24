@@ -92,36 +92,43 @@ function ViewVenue() {
       )}
 
       <ImageGallery data={data} />
-
       {data && (
-        <div className="mx-auto mb-10 flex w-[70%] flex-col items-center justify-between gap-5 sm:flex-row">
+        <div className="mx-auto mb-10 flex max-w-[1000px] flex-col items-center justify-between gap-5 sm:flex-row">
           <MetaList data={data} />
           <div className="flex flex-col">
             <p className="mx-auto text-lg font-semibold">{data.price}$</p>
             <p>per night</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row sm:gap-2">
             <p className="text-lg font-semibold">Max Guests: </p>
-            <p className="text-lg">{data.maxGuests}</p>
+            <p className="mx-auto text-lg">{data.maxGuests}</p>
           </div>
         </div>
       )}
 
-      {data && (
-        <div>
-          <p className="mx-auto my-10 w-[80%] break-all text-lg">
-            {data.description}
-          </p>
-        </div>
-      )}
+      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2">
+        {data && (
+          <div className="max-w-full">
+            <p className="mx-auto my-10 text-lg">
+              {data.description.split(" ").map((word, index) =>
+                word.length > 15 ? (
+                  <span key={index} className="break-all">
+                    {word}
+                  </span>
+                ) : (
+                  <span key={index}>{word} </span>
+                ),
+              )}
+            </p>
+          </div>
+        )}
 
-      <div className="grid w-full grid-cols-1 gap-10 xl:grid-cols-2">
         <Booking data={data} id={id} bookedDates={getDisabledDates()} />
-        <Calendar
-          isRangeBooked={isRangeBooked}
-          disabledDates={getDisabledDates()}
-        />
       </div>
+      <Calendar
+        isRangeBooked={isRangeBooked}
+        disabledDates={getDisabledDates()}
+      />
     </div>
   );
 }

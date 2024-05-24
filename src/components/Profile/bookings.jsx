@@ -27,7 +27,7 @@ function MyBookings({ bookings }) {
   }
 
   return (
-    <div className="mx-auto mb-20 w-5/6 border px-10 py-8 max-w-[1200px]">
+    <div className="mx-auto mb-20 w-5/6 max-w-[1200px] border px-10 py-8">
       <h2 className="mb-4 text-xl font-bold">My Bookings</h2>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {bookings.map((booking, id) => (
