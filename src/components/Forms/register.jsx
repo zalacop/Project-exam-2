@@ -227,7 +227,7 @@ function RegisterForm() {
       <button
         type="submit"
         id="register_button"
-        className="mx-auto w-max border-4 border-dark-green bg-dark-green px-8 py-1 font-semibold text-background"
+        className="mx-auto w-max border-4 border-dark-green bg-dark-green px-5 py-1 font-semibold text-background"
       >
         Register
       </button>
@@ -235,7 +235,7 @@ function RegisterForm() {
       {/* Cancel Button */}
       <Link
         to="/login"
-        className="cancel mx-auto border-4 border-orange px-8 py-1 font-semibold"
+        className="cancel mx-auto border-4 border-orange px-6 py-0.5 font-semibold"
       >
         Cancel
       </Link>
