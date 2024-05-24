@@ -21,14 +21,10 @@ function Venues() {
         setPageCount(data.meta.pageCount);
       }
       if (data.data) {
-        setAllVenues((prevVenues) => [...data.data]);
+        setAllVenues(data.data);
       }
     }
   }, [data]);
-
-  const indexOfLastVenue = currentPage * venuesPerPage;
-  const indexOfFirstVenue = indexOfLastVenue - venuesPerPage;
-  const currentVenues = allVenues.slice(indexOfFirstVenue, indexOfLastVenue);
 
   const handleSearchResults = (results) => {
     setSearchResults(results);
@@ -52,7 +48,7 @@ function Venues() {
           <VenueCard venues={searchResults} />
         )
       ) : (
-        <VenueCard venues={currentVenues} />
+        <VenueCard venues={allVenues} />
       )}
 
       {!isSearching && (
