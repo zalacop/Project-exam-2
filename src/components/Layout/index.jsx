@@ -7,7 +7,7 @@ function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main>
+      <main className="mb-10">
         <Outlet />
       </main>
       <Footer />
