@@ -16,9 +16,14 @@ function Nav() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     setIsLoggedIn(false);
+    closeMenu();
     navigate("/");
   };
 
@@ -55,6 +60,7 @@ function Nav() {
           <li>
             <Link
               to="/venues"
+              onClick={closeMenu}
               className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
             >
               Venues
@@ -65,6 +71,7 @@ function Nav() {
               <li>
                 <Link
                   to="/profile"
+                  onClick={closeMenu}
                   className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
                 >
                   Profile
@@ -84,6 +91,7 @@ function Nav() {
             <li>
               <Link
                 to="/login"
+                onClick={closeMenu}
                 className="block rounded px-3 py-2 uppercase md:bg-transparent md:p-0"
               >
                 Log in
