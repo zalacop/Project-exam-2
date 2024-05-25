@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import Spinner from "../Spinner";
 
 function FetchVenues() {
   const {
@@ -78,7 +79,7 @@ function HomeVenues() {
   const { norwayCities, spainCities, isLoading, isError } = FetchVenues();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
 
   if (isError) {
@@ -113,8 +114,8 @@ function HomeVenues() {
 
   return (
     <div>
-      <section className="my-8">
-        <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Norway</h2>
+      <section className="my-8 mx-auto max-w-[1400px]">
+        <h2 className="my-5 ml-20 pl-20 text-2xl font-bold">Norway</h2>
         <div className="slider-container mx-auto w-3/4">
           <Slider {...settings}>
             {norwayCities.map((venue, index) => (
@@ -136,8 +137,8 @@ function HomeVenues() {
       </section>
 
       {spainCities.length > 0 && (
-        <section className="my-8 py-5">
-          <h2 className="my-5 ml-5 pl-5 text-2xl font-bold">Spain</h2>
+      <section className="my-8 mx-auto max-w-[1400px]">
+      <h2 className="my-5 ml-20 pl-20 text-2xl font-bold">Spain</h2>
           <div className="mx-auto w-3/4">
             <Slider {...settings}>
               {spainCities.map((venue, index) => (

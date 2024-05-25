@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
 import { Link } from "react-router-dom";
+import Spinner from "../Spinner";
 
 function ViewBookings() {
   const { id } = useParams();
@@ -14,11 +15,11 @@ function ViewBookings() {
   } = useApi(`${holidazeUrls.urlVenues}/${id}?_bookings=true`);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isError || !venueData) {
-    return <div>Error fetching data</div>;
+    return <div>Something went wrong!</div>;
   }
 
   const { data, meta } = venueData;

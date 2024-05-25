@@ -8,6 +8,7 @@ import MetaList from "../Meta";
 import Calendar from "../Calandar";
 import Booking from "../Forms/bookingVenue";
 import Rating from "../Rating";
+import Spinner from "../Spinner";
 
 function ViewVenue() {
   const { id } = useParams();
@@ -18,11 +19,11 @@ function ViewVenue() {
   } = useApi(`${holidazeUrls.urlVenues}/${id}?_owner=true&_bookings=true`);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isError || !responseData) {
-    return <div>Error fetching data</div>;
+    return <div>Something went wrong!</div>;
   }
 
   const { data, meta } = responseData;
@@ -96,6 +97,7 @@ function ViewVenue() {
       )}
 
       <ImageGallery data={data} />
+      
       {data && (
         <div className="mx-auto mb-10 flex max-w-[1000px] flex-col items-center justify-between gap-5 sm:flex-row">
           <MetaList data={data} />
@@ -110,22 +112,27 @@ function ViewVenue() {
         </div>
       )}
 
-      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2">
-        {data && (
-          <div className="max-w-full">
-            <p className="mx-auto my-10 text-lg">
-              {data.description.split(" ").map((word, index) =>
-                word.length > 15 ? (
-                  <span key={index} className="break-all">
-                    {word}
-                  </span>
-                ) : (
-                  <span key={index}>{word} </span>
-                ),
-              )}
-            </p>
-          </div>
-        )}
+      <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 max-w-[1200px] mx-auto">
+      {data && (
+  <div className="max-w-full">
+    <p className="mx-auto my-10 text-lg">
+      {data.description.trim().split(" ").length === 1 ? (
+        "This is a wonderful venue suitable for various events, offering ample space and excellent amenities to ensure a great experience for all attendees."
+      ) : (
+        data.description.split(" ").map((word, index) =>
+          word.length > 15 ? (
+            <span key={index} className="break-all">
+              {word}
+            </span>
+          ) : (
+            <span key={index}>{word} </span>
+          ),
+        )
+      )}
+    </p>
+  </div>
+)}
+
 
         <Booking data={data} id={id} bookedDates={getDisabledDates()} />
       </div>

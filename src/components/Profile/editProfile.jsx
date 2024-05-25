@@ -80,7 +80,7 @@ function EditProfile({ isModalOpen, closeModal, onProfileUpdate }) {
     <>
       <div className="modal-background"></div>
       <div className="modal flex justify-center">
-        <div className="modal-content h-[80%] w-[90%]">
+        <div className="modal-content h-[80%] w-[90%] max-w-[1000px]">
           <IoClose onClick={closeModal} className="close-button" />
           <form onSubmit={handleSubmit} className="mx-auto max-w-[1000px]">
             <h2 className="my-5 flex justify-center text-2xl font-bold">

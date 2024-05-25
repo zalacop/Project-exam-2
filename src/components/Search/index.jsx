@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import holidazeUrls from "../../utils/url";
 import useApi from "../../hooks/useFetchApi";
 import VenueCard from "../Venues/index";
+import Spinner from "../Spinner";
 
 function Search({ onSearch }) {
   const [searchValue, setSearchValue] = useState("");
@@ -40,8 +41,8 @@ function Search({ onSearch }) {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data: {isError.message}</div>;
+  if (isLoading) return <Spinner />;
+  if (isError) return <div>Something went wrong!</div>;
 
   return (
     <>

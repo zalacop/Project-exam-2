@@ -5,6 +5,7 @@ import MyVenues from "../../components/Profile/venues";
 import MyBookings from "../../components/Profile/bookings";
 import EditProfile from "../../components/Profile/editProfile";
 import CreateVenue from "../../components/ManageVenues/newVenue";
+import Spinner from "../../components/Spinner";
 
 function Profile() {
   const location = useLocation();
@@ -69,7 +70,7 @@ function Profile() {
   };
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   const { venues, bookings, avatar, email, name, venueManager } = profile;
@@ -124,7 +125,7 @@ function Profile() {
           <MyVenues venues={venues} />
         )}
         {venueManager && (!venues || venues.length === 0) && (
-          <div className="mx-auto my-10 w-3/4 border px-10 py-5">
+          <div className="mx-auto my-10 w-3/4 border px-10 py-5 max-w-[1200px]">
             <h2 className="mb-4 text-xl font-bold">My Venues</h2>
             <p>You currently don't have any venues.</p>
           </div>
@@ -134,7 +135,7 @@ function Profile() {
       <div>
         {bookings && bookings.length > 0 && <MyBookings bookings={bookings} />}
         {bookings && bookings.length === 0 && (
-          <div className="mx-auto w-3/4 border px-10 py-5">
+          <div className="mx-auto w-3/4 border px-10 py-5 max-w-[1200px]">
             <h2 className="mb-4 text-xl font-bold">My Bookings</h2>
             <p>You currently don't have any upcoming bookings.</p>
           </div>

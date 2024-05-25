@@ -3,6 +3,7 @@ import Search from "../../components/Search";
 import VenueCard from "../../components/Venues";
 import useApi from "../../hooks/useFetchApi";
 import holidazeUrls from "../../utils/url";
+import Spinner from "../../components/Spinner";
 
 function Venues() {
   const [allVenues, setAllVenues] = useState([]);
@@ -35,7 +36,7 @@ function Venues() {
     setCurrentPage(pageNumber);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (isError) return <div>Error fetching data: {isError.message}</div>;
 
   const maxPagesToShow = 5;
