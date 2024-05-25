@@ -114,7 +114,7 @@ function HomeVenues() {
 
   return (
     <div>
-      <section className="my-8 mx-auto max-w-[1400px]">
+      <section className="mx-auto my-8 max-w-[1400px]">
         <h2 className="my-5 ml-20 pl-20 text-2xl font-bold">Norway</h2>
         <div className="slider-container mx-auto w-3/4">
           <Slider {...settings}>
@@ -137,8 +137,8 @@ function HomeVenues() {
       </section>
 
       {spainCities.length > 0 && (
-      <section className="my-8 mx-auto max-w-[1400px]">
-      <h2 className="my-5 ml-20 pl-20 text-2xl font-bold">Spain</h2>
+        <section className="mx-auto my-8 max-w-[1400px]">
+          <h2 className="my-5 ml-20 pl-20 text-2xl font-bold">Spain</h2>
           <div className="mx-auto w-3/4">
             <Slider {...settings}>
               {spainCities.map((venue, index) => (
