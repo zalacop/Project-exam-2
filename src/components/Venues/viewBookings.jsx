@@ -27,7 +27,7 @@ function ViewBookings() {
   return (
     <div className="mx-auto mt-20 flex w-[90%] flex-col items-start justify-center">
       <Link to="/profile">
-        <p className="ml-10 text-lg underline">Back to profile</p>
+        <p className="ml-10 text-lg underline hover:text-dark-green font-cta">Back to profile</p>
       </Link>
       <h2 className="mx-auto my-5 mb-10 flex justify-center text-2xl font-bold">
         Bookings for {data && data.name}

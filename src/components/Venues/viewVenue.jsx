@@ -68,7 +68,7 @@ function ViewVenue() {
   return (
     <div className="container mx-auto mt-20 w-[90%] pt-10">
       <Link to="/venues">
-        <p className="ml-10 text-lg underline">Back to venues</p>
+        <p className="ml-10 text-lg underline hover:text-dark-green font-cta">Back to venues</p>
       </Link>
       {data && (
         <>
